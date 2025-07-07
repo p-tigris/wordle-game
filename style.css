@@ -7,16 +7,21 @@ body {
 
 #grid {
     display: flex;
+    flex-direction: column;
 }
 
 .word {
     display: flex;
-    gap: 2em;
+    gap: 1em;
+    width: 500px;
+    margin-bottom: 1em;
 }
 
 .letter {
     border: 5px solid blue;
     aspect-ratio: 1/1;
+    width: 20%;
     font-size: 48px;
     color: green;
+    text-align: center;
 }
