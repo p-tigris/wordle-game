@@ -6,17 +6,17 @@ body {
 }
 
 #grid {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-}
-
-#word {
     display: flex;
 }
 
-#letter {
-    border: 1px solid blue;
+.word {
+    display: flex;
+    gap: 2em;
+}
+
+.letter {
+    border: 5px solid blue;
+    aspect-ratio: 1/1;
     font-size: 48px;
     color: green;
 }
