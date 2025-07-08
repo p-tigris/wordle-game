@@ -34,7 +34,7 @@ const wordleWords = [
     },
 ];
 
-for (let i = 0; i < keys.length; i++) {
+for (let i = 0; i < keys.length - 2; i++) {
     keys[i].addEventListener('click', () => {
         document.getElementById('0').textContent = keys[i].textContent;
     })
