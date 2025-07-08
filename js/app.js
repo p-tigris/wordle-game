@@ -40,6 +40,10 @@ for (let i = 0; i < keys.length - 2; i++) {
     })
 }
 
+keys[keys.length - 2].addEventListener('click', () => {
+    document.getElementById('0').textContent = "";
+})
+
 // for (let i = 0; i < keys.length - 2; i++) {
 //     keys[i].addEventListener('click', (key) => {
 //         for (const word of wordleWords) {
