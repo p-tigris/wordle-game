@@ -34,9 +34,15 @@ const wordleWords = [
     },
 ];
 
+
+
 for (let i = 0; i < keys.length - 2; i++) {
     keys[i].addEventListener('click', () => {
-        document.getElementById('0').textContent = keys[i].textContent;
+        for (let j = 0; j < wordleWords[0]['first'].length; j++)
+            if (document.getElementById(j).textContent === "") {
+                document.getElementById(j).textContent = keys[i].textContent;
+                return;
+            }
     })
 }
 
