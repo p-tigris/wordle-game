@@ -8,7 +8,7 @@ for (let letter of lettersOfAlphabet) {
     keyContainerEl.appendChild(keyEl);
 }
 
-const backspaceKeyEl = document.createElement('button');
+export const backspaceKeyEl = document.createElement('button');
 backspaceKeyEl.textContent = "⌫"
 
 const enterKeyEl = document.createElement('button');

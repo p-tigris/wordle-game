@@ -1,4 +1,4 @@
-import { keyContainerEl } from "./setup.js";
+import { keyContainerEl, backspaceKeyEl } from "./setup.js";
 
 const startButtonEl = document.querySelector('#start');
 const gamePlayEl = document.querySelector('#game-play');
@@ -46,8 +46,13 @@ for (let i = 0; i < keys.length - 2; i++) {
     })
 }
 
-keys[keys.length - 2].addEventListener('click', () => {
-    document.getElementById('0').textContent = "";
+backspaceKeyEl.addEventListener('click', () => {
+    for (let i = 4; i >= 0; i--) {
+        if (document.getElementById(i).textContent !== "") {
+            document.getElementById(i).textContent = "";
+            return;
+        }
+    }
 })
 
 // for (let i = 0; i < keys.length - 2; i++) {
