@@ -34,10 +34,22 @@ const wordleWords = [
     },
 ];
 
-for (let i = 0; i < keys.length - 2; i++) {
-    keys[i].addEventListener('click', (key) => {
-        document.getElementById(wordleWords[0]['first'][0]).textContent = key.textContent;
+for (let i = 0; i < keys.length; i++) {
+    keys[i].addEventListener('click', () => {
+        document.getElementById('0').textContent = keys[i].textContent;
     })
 }
 
-console.log(document.getElementById(wordleWords[0]['first'][0]).textContent)
+// for (let i = 0; i < keys.length - 2; i++) {
+//     keys[i].addEventListener('click', (key) => {
+//         for (const word of wordleWords) {
+//             for (const numberWord in word) {
+//                 for (let j = 0; j < word[numberWord].length; j++) {
+//                     document.getElementById(j).textContent = key.textContent;
+//                 }
+//             }
+//         }
+//     })
+// }
+
+// console.log(document.getElementById(wordleWords[0]['first'][0]));
