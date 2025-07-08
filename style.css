@@ -10,18 +10,22 @@ body {
     flex-direction: column;
 }
 
+#message {
+    text-align: center;
+}
+
 .word {
     display: flex;
-    gap: 1em;
-    width: 500px;
+    gap: 5px;
+    width: 325px;
     margin-bottom: 1em;
 }
 
 .letter {
-    border: 5px solid blue;
+    border: 5px solid;
+    border-radius: 10px;
     aspect-ratio: 1/1;
     width: 20%;
     font-size: 48px;
-    color: green;
     text-align: center;
 }
