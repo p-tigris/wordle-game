@@ -9,9 +9,14 @@ for (let letter of lettersOfAlphabet) {
 }
 
 const backspaceKeyEl = document.createElement('button');
+backspaceKeyEl.textContent = "⌫"
 
 const enterKeyEl = document.createElement('button');
-keyContainerEl.appendChild(backspaceKeyEl, enterKeyEl);
+enterKeyEl.textContent = "ENTER";
+
+[backspaceKeyEl, enterKeyEl].forEach((el) => {
+    keyContainerEl.appendChild(el);
+})
 
 keyContainerEl.style.display = "grid";
 keyContainerEl.style.gridTemplateColumns = "repeat(5, 75px)";
