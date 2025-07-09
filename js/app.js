@@ -4,7 +4,6 @@ import { wordList } from "./data.js";
 const startButtonEl = document.querySelector('#start');
 const messageEl = document.querySelector('#message');
 const gamePlayEl = document.querySelector('#game-play');
-const wordEl = document.querySelector('.word');
 
 const attempts = ["first", "second", "third", "fourth", "fifth", "sixth"];
 let currentAttemptIndex = 0;
