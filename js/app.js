@@ -92,17 +92,19 @@ const render = () => {
             userArray.push(keys[i].textContent);
             document.getElementById(wordleBoard[attempt][charIndex]).textContent = keys[i].textContent.toUpperCase();
             charIndex++;
+            console.log(userArray);
         });
     }
-    enterKeyEl.addEventListener('click', () => {
+}
+
+enterKeyEl.addEventListener('click', () => {
     if (userArray.length === 5 && currentAttemptIndex < 6) {
         currentAttemptIndex++;
-        wordleIndex++;
         attempt = attempts[currentAttemptIndex];
-        render();
+        charIndex = 0;
+        console.log(document.getElementById(wordleBoard[attempt][charIndex]))
     }
-})
-}
+})  
 
 startButtonEl.addEventListener('click', () => {
     gamePlayEl.appendChild(keyContainerEl);
