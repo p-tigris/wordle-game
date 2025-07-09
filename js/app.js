@@ -2,13 +2,9 @@ import { keyContainerEl, backspaceKeyEl, enterKeyEl } from "./setup.js";
 import { wordList } from "./data.js";
 
 const startButtonEl = document.querySelector('#start');
+const messageEl = document.querySelector('#message');
 const gamePlayEl = document.querySelector('#game-play');
 const wordEl = document.querySelector('.word');
-
-startButtonEl.addEventListener('click', () => {
-    gamePlayEl.appendChild(keyContainerEl);
-    startButtonEl.remove();
-})
 
 const attempts = ["first", "second", "third", "fourth", "fifth", "sixth"];
 let currentAttemptIndex = 0;
@@ -39,40 +35,51 @@ const wordleBoard = [
 
 let wordleIndex = 0;
 let userArray = [];
+let charIndex;
 
-for (let i = 0; i < keys.length - 2; i++) {
-    keys[i].addEventListener('click', () => {
-        for (let j = 0; j < wordleBoard[wordleIndex][attempt].length; j++) {
-            if (document.getElementById(j).textContent === "") {
-                userArray.push(keys[i].textContent);
-                document.getElementById(j).textContent = keys[i].textContent;
-                return;
-            }
-        }
-    })
-}
+// for (let i = 0; i < keys.length - 2; i++) {
+//     keys[i].addEventListener('click', () => {
+//         for (let j = 0; j < wordleBoard[wordleIndex][attempt].length; j++) {
+//             if (document.getElementById(j).textContent === "") {
+//                 userArray.push(keys[i].textContent);
+//                 document.getElementById(j).textContent = keys[i].textContent;
+//                 return;
+//             }
+//         }
+//     })
+// }
 
-backspaceKeyEl.addEventListener('click', () => {
-    for (let i = wordleBoard[wordleIndex][attempt].length; i >= 0; i--) {
-        if (document.getElementById(i).textContent !== "") {
-            userArray.pop();
-            document.getElementById(i).textContent = "";
-            return;
-        }
-    }
-})
+// backspaceKeyEl.addEventListener('click', () => {
+//     for (let i = wordleBoard[wordleIndex][attempt].length; i >= 0; i--) {
+//         if (document.getElementById(i).textContent !== "") {
+//             userArray.pop();
+//             document.getElementById(i).textContent = "";
+//             return;
+//         }
+//     }
+// })
 
-enterKeyEl.addEventListener('click', () => {
-    if (userArray.length === 5 && currentAttemptIndex < 6) {
-        currentAttemptIndex++;
-        wordleIndex++;
-        attempt = attempts[currentAttemptIndex];
-    }
-})
-
+// enterKeyEl.addEventListener('click', () => {
+//     if (userArray.length === 5 && currentAttemptIndex < 6) {
+//         currentAttemptIndex++;
+//         wordleIndex++;
+//         attempt = attempts[currentAttemptIndex];
+//     }
+// })
 
 const checkRealWord = () => {
-
+    let isRealWord = false;
+    if (userArray.length === 5 && currentAttemptIndex < 6) {
+        userWord = userArray.toString();
+        for (let word of wordList) {
+            if (word === userWord) {
+                isRealWord = true;
+            } 
+        }
+        if (!isRealWord) {
+            messageEl.textContent = "Not a real word"
+        }
+    }
 }
 
 const compareWords = () => {
@@ -82,17 +89,33 @@ const compareWords = () => {
 // Game selects a random word as the winning word from a data array
 const winningWord = wordList[Math.floor(Math.random() * wordList.length)];
 const winningWordArray = winningWord.split("");
-console.log(winningWord);
-console.log(winningWordArray);
 // Game initializes game board
 const init = () => {
     currentAttemptIndex = 0;
     attempt = attempts[currentAttemptIndex];
     wordleIndex = 0;
+    charIndex = 0;
     userArray = [];
 }
+
+document.addEventListener('DOMContentLoaded', init);
 // User inputs letters for a word in the first row
+const render = () => {
+    for (let i = 0; i < keys.length - 2; i++) {
+        keys[i].addEventListener('click', () => {
+            document.getElementById(wordleBoard[wordleIndex][attempt][charIndex]).textContent = keys[i].textContent;
+        });
+    }
+}
+
+startButtonEl.addEventListener('click', () => {
+    gamePlayEl.appendChild(keyContainerEl);
+    startButtonEl.remove();
+    render();
+})
+
 // Game checks to make sure it is a word
+
 // Game finds if any letters are the same as the winning word and if they are in the same position
 // User continues to guess for words down each row
 // If user finds word before the sixth row finishes, then user wins the game; loses if the user does not
