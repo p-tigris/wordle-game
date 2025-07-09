@@ -103,7 +103,9 @@ document.addEventListener('DOMContentLoaded', init);
 const render = () => {
     for (let i = 0; i < keys.length - 2; i++) {
         keys[i].addEventListener('click', () => {
+            userArray.push(keys[i].textContent);
             document.getElementById(wordleBoard[wordleIndex][attempt][charIndex]).textContent = keys[i].textContent;
+            charIndex++;
         });
     }
 }
