@@ -12,28 +12,15 @@ let attempt = attempts[currentAttemptIndex];
 
 const keys = keyContainerEl.children;
 
-const wordleBoard = [
-    {
-        "first": ["0", "1", "2", "3", "4"]
-    }, 
-    {
-        "second": ["5", "6", "7", "8", "9"]
-    }, 
-    {
-        "third": ["10", "11", "12", "13", "14"]
-    }, 
-    {
-        "fourth": ["15", "16", "17", "18", "19"]
-    }, 
-    {
-        "fifth": ["20", "21", "22", "23", "24"]
-    }, 
-    {
-        "sixth": ["25", "26", "27", "28", "29"]
-    },
-];
+const wordleBoard = {
+        "first": ["0", "1", "2", "3", "4"], 
+        "second": ["5", "6", "7", "8", "9"], 
+        "third": ["10", "11", "12", "13", "14"], 
+        "fourth": ["15", "16", "17", "18", "19"], 
+        "fifth": ["20", "21", "22", "23", "24"], 
+        "sixth": ["25", "26", "27", "28", "29"],
+};
 
-let wordleIndex = 0;
 let userArray = [];
 let charIndex;
 
@@ -93,7 +80,6 @@ const winningWordArray = winningWord.split("");
 const init = () => {
     currentAttemptIndex = 0;
     attempt = attempts[currentAttemptIndex];
-    wordleIndex = 0;
     charIndex = 0;
     userArray = [];
 }
@@ -104,10 +90,18 @@ const render = () => {
     for (let i = 0; i < keys.length - 2; i++) {
         keys[i].addEventListener('click', () => {
             userArray.push(keys[i].textContent);
-            document.getElementById(wordleBoard[wordleIndex][attempt][charIndex]).textContent = keys[i].textContent;
+            document.getElementById(wordleBoard[attempt][charIndex]).textContent = keys[i].textContent.toUpperCase();
             charIndex++;
         });
     }
+    enterKeyEl.addEventListener('click', () => {
+    if (userArray.length === 5 && currentAttemptIndex < 6) {
+        currentAttemptIndex++;
+        wordleIndex++;
+        attempt = attempts[currentAttemptIndex];
+        render();
+    }
+})
 }
 
 startButtonEl.addEventListener('click', () => {
