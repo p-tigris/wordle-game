@@ -11,7 +11,7 @@ for (let letter of lettersOfAlphabet) {
 export const backspaceKeyEl = document.createElement('button');
 backspaceKeyEl.textContent = "⌫"
 
-const enterKeyEl = document.createElement('button');
+export const enterKeyEl = document.createElement('button');
 enterKeyEl.textContent = "ENTER";
 
 [backspaceKeyEl, enterKeyEl].forEach((el) => {

@@ -1,4 +1,4 @@
-import { keyContainerEl, backspaceKeyEl } from "./setup.js";
+import { keyContainerEl, backspaceKeyEl, enterKeyEl } from "./setup.js";
 
 const startButtonEl = document.querySelector('#start');
 const gamePlayEl = document.querySelector('#game-play');
@@ -9,7 +9,9 @@ startButtonEl.addEventListener('click', () => {
     startButtonEl.remove();
 })
 
-const userArray = [];
+const attempts = ["first", "second", "third", "fourth", "fifth", "sixth"];
+let currentAttemptIndex = 0;
+let attempt = attempts[currentAttemptIndex];
 
 const keys = keyContainerEl.children;
 
@@ -34,26 +36,48 @@ const wordleWords = [
     },
 ];
 
+let wordleIndex = 0;
 
+const userArray = []
 
 for (let i = 0; i < keys.length - 2; i++) {
     keys[i].addEventListener('click', () => {
-        for (let j = 0; j < wordleWords[0]['first'].length; j++)
+        for (let j = 0; j < wordleWords[wordleIndex][attempt].length; j++) {
             if (document.getElementById(j).textContent === "") {
+                userArray.push(keys[i].textContent);
                 document.getElementById(j).textContent = keys[i].textContent;
                 return;
             }
+        }
     })
 }
 
 backspaceKeyEl.addEventListener('click', () => {
     for (let i = 4; i >= 0; i--) {
         if (document.getElementById(i).textContent !== "") {
+            userArray.pop();
             document.getElementById(i).textContent = "";
             return;
         }
     }
 })
+
+enterKeyEl.addEventListener('click', () => {
+    if (userArray.length === 5) {
+        currentAttemptIndex++;
+        wordleIndex++;
+        attempt = attempts[currentAttemptIndex];
+    }
+})
+
+
+const checkRealWord = () => {
+
+}
+
+const compareWords = () => {
+
+}
 
 // for (let i = 0; i < keys.length - 2; i++) {
 //     keys[i].addEventListener('click', (key) => {
@@ -68,3 +92,10 @@ backspaceKeyEl.addEventListener('click', () => {
 // }
 
 // console.log(document.getElementById(wordleWords[0]['first'][0]));
+
+// Game selects a random word as the winning word from a data array
+// User inputs letters for a word in the first row
+// Game checks to make sure it is a word
+// Game finds if any letters are the same as the winning word and if they are in the same position
+// User continues to guess for words down each row
+// If user finds word before the sixth row finishes, then user wins the game; loses if the user does not
