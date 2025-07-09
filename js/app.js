@@ -26,17 +26,20 @@ let charIndex;
 
 const checkRealWord = () => {
     let isRealWord = false;
+    console.log(userArray);
     if (userArray.length === 5 && currentAttemptIndex < 6) {
-        const userWord = userArray.toString();
+        const userWord = userArray.join("");
+        console.log(userWord);
         for (let word of wordList) {
             if (word === userWord) {
                 isRealWord = true;
+                return;
             } 
         }
-        if (!isRealWord) {
-            messageEl.textContent = "Not an allowed word"
-            return;
-        }
+    if (isRealWord === false) {
+        messageEl.textContent = "Not an allowed word"
+        return;
+    }
     }
 }
 
@@ -63,6 +66,7 @@ document.addEventListener('DOMContentLoaded', init);
 // User inputs letters for a word in the first row
 
 const render = () => {
+    messageEl.textContent = "";
 
     for (let i = 0; i < keys.length - 2; i++) {
         keys[i].addEventListener('click', () => {
@@ -79,6 +83,9 @@ const render = () => {
     }
 
     enterKeyEl.addEventListener('click', () => {
+        if (messageEl.textContent === "Not an allowed word") {
+            return;
+        }
         if (userArray.length === 5 && currentAttemptIndex < 6) {
             currentAttemptIndex++;
             attempt = attempts[currentAttemptIndex];
