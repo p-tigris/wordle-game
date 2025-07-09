@@ -1,4 +1,5 @@
 import { keyContainerEl, backspaceKeyEl, enterKeyEl } from "./setup.js";
+import { wordList } from "./data.js";
 
 const startButtonEl = document.querySelector('#start');
 const gamePlayEl = document.querySelector('#game-play');
@@ -15,7 +16,7 @@ let attempt = attempts[currentAttemptIndex];
 
 const keys = keyContainerEl.children;
 
-const wordleWords = [
+const wordleBoard = [
     {
         "first": ["0", "1", "2", "3", "4"]
     }, 
@@ -37,12 +38,11 @@ const wordleWords = [
 ];
 
 let wordleIndex = 0;
-
-const userArray = []
+let userArray = [];
 
 for (let i = 0; i < keys.length - 2; i++) {
     keys[i].addEventListener('click', () => {
-        for (let j = 0; j < wordleWords[wordleIndex][attempt].length; j++) {
+        for (let j = 0; j < wordleBoard[wordleIndex][attempt].length; j++) {
             if (document.getElementById(j).textContent === "") {
                 userArray.push(keys[i].textContent);
                 document.getElementById(j).textContent = keys[i].textContent;
@@ -53,7 +53,7 @@ for (let i = 0; i < keys.length - 2; i++) {
 }
 
 backspaceKeyEl.addEventListener('click', () => {
-    for (let i = 4; i >= 0; i--) {
+    for (let i = wordleBoard[wordleIndex][attempt].length; i >= 0; i--) {
         if (document.getElementById(i).textContent !== "") {
             userArray.pop();
             document.getElementById(i).textContent = "";
@@ -63,7 +63,7 @@ backspaceKeyEl.addEventListener('click', () => {
 })
 
 enterKeyEl.addEventListener('click', () => {
-    if (userArray.length === 5) {
+    if (userArray.length === 5 && currentAttemptIndex < 6) {
         currentAttemptIndex++;
         wordleIndex++;
         attempt = attempts[currentAttemptIndex];
@@ -79,21 +79,18 @@ const compareWords = () => {
 
 }
 
-// for (let i = 0; i < keys.length - 2; i++) {
-//     keys[i].addEventListener('click', (key) => {
-//         for (const word of wordleWords) {
-//             for (const numberWord in word) {
-//                 for (let j = 0; j < word[numberWord].length; j++) {
-//                     document.getElementById(j).textContent = key.textContent;
-//                 }
-//             }
-//         }
-//     })
-// }
-
-// console.log(document.getElementById(wordleWords[0]['first'][0]));
-
 // Game selects a random word as the winning word from a data array
+const winningWord = wordList[Math.floor(Math.random() * wordList.length)];
+const winningWordArray = winningWord.split("");
+console.log(winningWord);
+console.log(winningWordArray);
+// Game initializes game board
+const init = () => {
+    currentAttemptIndex = 0;
+    attempt = attempts[currentAttemptIndex];
+    wordleIndex = 0;
+    userArray = [];
+}
 // User inputs letters for a word in the first row
 // Game checks to make sure it is a word
 // Game finds if any letters are the same as the winning word and if they are in the same position
