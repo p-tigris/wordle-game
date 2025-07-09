@@ -102,6 +102,7 @@ enterKeyEl.addEventListener('click', () => {
         currentAttemptIndex++;
         attempt = attempts[currentAttemptIndex];
         charIndex = 0;
+        userArray = [];
         console.log(document.getElementById(wordleBoard[attempt][charIndex]))
     }
 })  
