@@ -24,27 +24,18 @@ const wordleBoard = {
 let userArray = [];
 let charIndex;
 
-// backspaceKeyEl.addEventListener('click', () => {
-//     for (let i = wordleBoard[wordleIndex][attempt].length; i >= 0; i--) {
-//         if (document.getElementById(i).textContent !== "") {
-//             userArray.pop();
-//             document.getElementById(i).textContent = "";
-//             return;
-//         }
-//     }
-// })
-
 const checkRealWord = () => {
     let isRealWord = false;
     if (userArray.length === 5 && currentAttemptIndex < 6) {
-        userWord = userArray.toString();
+        const userWord = userArray.toString();
         for (let word of wordList) {
             if (word === userWord) {
                 isRealWord = true;
             } 
         }
         if (!isRealWord) {
-            messageEl.textContent = "Not a real word"
+            messageEl.textContent = "Not an allowed word"
+            return;
         }
     }
 }
@@ -56,26 +47,20 @@ const compareWords = () => {
 // Game selects a random word as the winning word from a data array
 const winningWord = wordList[Math.floor(Math.random() * wordList.length)];
 const winningWordArray = winningWord.split("");
+
+console.log(winningWord);
+console.log(winningWordArray);
 // Game initializes game board
 const init = () => {
     currentAttemptIndex = 0;
     attempt = attempts[currentAttemptIndex];
     charIndex = 0;
     userArray = [];
+    messageEl.textContent = "Press Start Game to begin!"
 }
 
 document.addEventListener('DOMContentLoaded', init);
 // User inputs letters for a word in the first row
-// const render = () => {
-//     for (let i = 0; i < keys.length - 2; i++) {
-//         keys[i].addEventListener('click', () => {
-//             userArray.push(keys[i].textContent);
-//             document.getElementById(wordleBoard[attempt][charIndex]).textContent = keys[i].textContent.toUpperCase();
-//             charIndex++;
-//             console.log(userArray);
-//         });
-//     }
-// }
 
 const render = () => {
 
@@ -83,7 +68,9 @@ const render = () => {
         keys[i].addEventListener('click', () => {
             if (charIndex < 5 && currentAttemptIndex < 6) {
                 userArray.push(keys[i].textContent);
-                console.log(charIndex);
+                if (userArray.length === 5) {
+                    checkRealWord();
+                }
                 document.getElementById(wordleBoard[attempt][charIndex]).textContent = keys[i].textContent.toUpperCase();
                 charIndex++;
                 console.log(userArray);
@@ -101,9 +88,12 @@ const render = () => {
     })
 
     backspaceKeyEl.addEventListener('click', () => {
-            userArray.pop();
-            charIndex--;
-            document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
+        if (messageEl.textContent === "Not an allowed word") {
+            messageEl.textContent = "";
+        }
+        userArray.pop();
+        charIndex--;
+        document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
     })
     
 }
