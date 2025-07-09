@@ -24,18 +24,6 @@ const wordleBoard = {
 let userArray = [];
 let charIndex;
 
-// for (let i = 0; i < keys.length - 2; i++) {
-//     keys[i].addEventListener('click', () => {
-//         for (let j = 0; j < wordleBoard[wordleIndex][attempt].length; j++) {
-//             if (document.getElementById(j).textContent === "") {
-//                 userArray.push(keys[i].textContent);
-//                 document.getElementById(j).textContent = keys[i].textContent;
-//                 return;
-//             }
-//         }
-//     })
-// }
-
 // backspaceKeyEl.addEventListener('click', () => {
 //     for (let i = wordleBoard[wordleIndex][attempt].length; i >= 0; i--) {
 //         if (document.getElementById(i).textContent !== "") {
@@ -43,14 +31,6 @@ let charIndex;
 //             document.getElementById(i).textContent = "";
 //             return;
 //         }
-//     }
-// })
-
-// enterKeyEl.addEventListener('click', () => {
-//     if (userArray.length === 5 && currentAttemptIndex < 6) {
-//         currentAttemptIndex++;
-//         wordleIndex++;
-//         attempt = attempts[currentAttemptIndex];
 //     }
 // })
 
@@ -86,15 +66,26 @@ const init = () => {
 
 document.addEventListener('DOMContentLoaded', init);
 // User inputs letters for a word in the first row
-const render = () => {
-    for (let i = 0; i < keys.length - 2; i++) {
-        keys[i].addEventListener('click', () => {
+// const render = () => {
+//     for (let i = 0; i < keys.length - 2; i++) {
+//         keys[i].addEventListener('click', () => {
+//             userArray.push(keys[i].textContent);
+//             document.getElementById(wordleBoard[attempt][charIndex]).textContent = keys[i].textContent.toUpperCase();
+//             charIndex++;
+//             console.log(userArray);
+//         });
+//     }
+// }
+
+for (let i = 0; i < keys.length - 2; i++) {
+    keys[i].addEventListener('click', () => {
+        if (charIndex < 5 && currentAttemptIndex < 6) {
             userArray.push(keys[i].textContent);
             document.getElementById(wordleBoard[attempt][charIndex]).textContent = keys[i].textContent.toUpperCase();
             charIndex++;
             console.log(userArray);
-        });
-    }
+        }
+    });
 }
 
 enterKeyEl.addEventListener('click', () => {
@@ -103,14 +94,13 @@ enterKeyEl.addEventListener('click', () => {
         attempt = attempts[currentAttemptIndex];
         charIndex = 0;
         userArray = [];
-        console.log(document.getElementById(wordleBoard[attempt][charIndex]))
+        // console.log(document.getElementById(wordleBoard[attempt][charIndex]))
     }
 })  
 
 startButtonEl.addEventListener('click', () => {
     gamePlayEl.appendChild(keyContainerEl);
     startButtonEl.remove();
-    render();
 })
 
 // Game checks to make sure it is a word
