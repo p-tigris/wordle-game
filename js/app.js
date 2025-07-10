@@ -127,17 +127,19 @@ backspaceKeyEl.addEventListener('click', () => {
 
 startButtonEl.addEventListener('click', () => {
     gamePlayEl.appendChild(keyContainerEl);
+    document.querySelectorAll(".key").forEach((key) => {
+        key.style.backgroundColor = "";
+    })
     startButtonEl.remove();
     messageEl.textContent = "";
 })
-
 // Game checks to make sure it is a word
 
 // Game finds if any letters are the same as the winning word and if they are in the same position
 const compareWords = () => {
         const wordEl = document.querySelector(`.${attempt}`);
         const lettersEl = wordEl.querySelectorAll('.letter');
-        const keysEl = document.querySelectorAll('#key');
+        const keysEl = document.querySelectorAll('.key');
 
         if (userArray.every((char, index) => char === winningWordArray[index])) {
             lettersEl.forEach((letter) => {
