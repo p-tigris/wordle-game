@@ -42,10 +42,6 @@ const checkRealWord = () => {
     }
 }
 
-const compareWords = () => {
-
-}
-
 // Game selects a random word as the winning word from a data array
 const winningWord = wordList[Math.floor(Math.random() * wordList.length)];
 const winningWordArray = winningWord.split("");
@@ -84,8 +80,8 @@ const render = () => {
     enterKeyEl.addEventListener('click', () => {
         if (messageEl.textContent === "Not an allowed word") {
             return;
-        }
-        if (userArray.length === 5 && currentAttemptIndex < 6) {
+        } else if (userArray.length === 5 && currentAttemptIndex < 6) {
+            compareWords();
             currentAttemptIndex++;
             attempt = attempts[currentAttemptIndex];
             charIndex = 0;
@@ -97,11 +93,12 @@ const render = () => {
         if (messageEl.textContent === "Not an allowed word") {
             messageEl.textContent = "";
         }
-        userArray.pop();
-        charIndex--;
-        document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
+        if (charIndex > 0) {
+            userArray.pop();
+            charIndex--;
+            document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
+        }
     })
-    
 }
 
 
@@ -115,5 +112,20 @@ startButtonEl.addEventListener('click', () => {
 // Game checks to make sure it is a word
 
 // Game finds if any letters are the same as the winning word and if they are in the same position
+const compareWords = () => {
+    // for (let char of userArray) {
+    //     for (let i = 0; i < winningWordArray.length; i++) {
+    //         if (char === winningWordArray[i]) {
+    //             for (let j = 0; j < wordleBoard[attempt].length; j++) {
+    //                 if (document.getElementById(wordleBoard[attempt][j]).textContent === char) {
+    //                     console.log(document.getElementById(wordleBoard[attempt][j]));
+    //                     document.getElementById(wordleBoard[attempt][j]).style.backgroundColor = "yellow";
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    if (userArray.every((char, index) => char === winningWordArray[index]))
+}
 // User continues to guess for words down each row
 // If user finds word before the sixth row finishes, then user wins the game; loses if the user does not
