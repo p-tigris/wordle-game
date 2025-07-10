@@ -4,7 +4,7 @@ import { wordList } from "./data.js";
 const messageEl = document.querySelector('#message');
 const gamePlayEl = document.querySelector('#game-play');
 
-const attempts = ["first", "second", "third", "fourth", "fifth", "sixth", "gameOver"];
+const attempts = ["first", "second", "third", "fourth", "fifth", "sixth"];
 let currentAttemptIndex = 0;
 let attempt = attempts[currentAttemptIndex];
 
@@ -62,22 +62,27 @@ const winningWordArray = winningWord.split("");
 
 console.log(winningWord);
 console.log(winningWordArray);
+
+console.log(wordleBoard[attempt]);
 // Game initializes game board
 const init = () => {
+    for (let attempt of attempts) {
+        for (let i = 0; i < 5; i++) {
+            document.getElementById(wordleBoard[attempt][i]).style.backgroundColor = "";
+            document.getElementById(wordleBoard[attempt][i]).textContent = "";
+        }
+    }
     currentAttemptIndex = 0;
     attempt = attempts[currentAttemptIndex];
     charIndex = 0;
     userArray = [];
     winner = false;
     gamePlayEl.appendChild(startButtonEl);
-    messageEl.textContent = "Press Start Game to begin!"
+    messageEl.textContent = "Press Start Game to begin!";
 }
 
 document.addEventListener('DOMContentLoaded', init);
 // User inputs letters for a word in the first row
-
-const render = () => {
-    messageEl.textContent = "";
 
     for (let i = 0; i < keys.length - 2; i++) {
         keys[i].addEventListener('click', () => {
@@ -119,14 +124,11 @@ const render = () => {
             document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
         }
     })
-}
-
-
 
 startButtonEl.addEventListener('click', () => {
     gamePlayEl.appendChild(keyContainerEl);
     startButtonEl.remove();
-    render();
+    messageEl.textContent = "";
 })
 
 // Game checks to make sure it is a word
