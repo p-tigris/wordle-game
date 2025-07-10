@@ -84,46 +84,46 @@ const init = () => {
 document.addEventListener('DOMContentLoaded', init);
 // User inputs letters for a word in the first row
 
-    for (let i = 0; i < keys.length - 2; i++) {
-        keys[i].addEventListener('click', () => {
-            if (charIndex < 5 && currentAttemptIndex < 6) {
-                userArray.push(keys[i].textContent);
-                if (userArray.length === 5) {
-                    checkRealWord();
-                }
-                document.getElementById(wordleBoard[attempt][charIndex]).textContent = keys[i].textContent.toUpperCase();
-                charIndex++;
-                console.log(userArray);
+for (let i = 0; i < keys.length - 2; i++) {
+    keys[i].addEventListener('click', () => {
+        if (charIndex < 5 && currentAttemptIndex < 6) {
+            userArray.push(keys[i].textContent);
+            if (userArray.length === 5) {
+                checkRealWord();
             }
-        });
+            document.getElementById(wordleBoard[attempt][charIndex]).textContent = keys[i].textContent.toUpperCase();
+            charIndex++;
+            console.log(userArray);
+        }
+    });
+}
+
+enterKeyEl.addEventListener('click', () => {
+    if (messageEl.textContent === "Not an allowed word") {
+        return;
+    } else if (userArray.length === 5 && currentAttemptIndex < 5) {
+        compareWords();
+        checkWinner();
+        currentAttemptIndex++;
+        attempt = attempts[currentAttemptIndex];
+        charIndex = 0;
+        userArray = [];
+    } else if (currentAttemptIndex === 5) {
+        compareWords();
+        checkWinner();
     }
+})
 
-    enterKeyEl.addEventListener('click', () => {
-        if (messageEl.textContent === "Not an allowed word") {
-            return;
-        } else if (userArray.length === 5 && currentAttemptIndex < 5) {
-            compareWords();
-            checkWinner();
-            currentAttemptIndex++;
-            attempt = attempts[currentAttemptIndex];
-            charIndex = 0;
-            userArray = [];
-        } else if (currentAttemptIndex === 5) {
-            compareWords();
-            checkWinner();
-        }
-    })
-
-    backspaceKeyEl.addEventListener('click', () => {
-        if (messageEl.textContent === "Not an allowed word") {
-            messageEl.textContent = "";
-        }
-        if (charIndex > 0) {
-            userArray.pop();
-            charIndex--;
-            document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
-        }
-    })
+backspaceKeyEl.addEventListener('click', () => {
+    if (messageEl.textContent === "Not an allowed word") {
+        messageEl.textContent = "";
+    }
+    if (charIndex > 0) {
+        userArray.pop();
+        charIndex--;
+        document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
+    }
+})
 
 startButtonEl.addEventListener('click', () => {
     gamePlayEl.appendChild(keyContainerEl);
