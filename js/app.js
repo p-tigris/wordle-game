@@ -44,6 +44,15 @@ const checkRealWord = () => {
     }
 }
 
+const checkWinner = () => {
+    if (winner === true) {
+        messageEl.textContent = `Congratulations! ${winningWord.toUpperCase()} is the correct word!`;
+        keyContainerEl.remove();
+    } else if (winner !== true && currentAttemptIndex === 5) {
+        messageEl.textContent = `Game Over. The correct word is ${winningWord.toUpperCase()}`;
+    }
+}
+
 // Game selects a random word as the winning word from a data array
 // const winningWord = wordList[Math.floor(Math.random() * wordList.length)];
 const winningWord = "after";
@@ -86,15 +95,14 @@ const render = () => {
             return;
         } else if (userArray.length === 5 && currentAttemptIndex < 5) {
             compareWords();
+            checkWinner();
             currentAttemptIndex++;
             attempt = attempts[currentAttemptIndex];
             charIndex = 0;
             userArray = [];
         } else if (currentAttemptIndex === 5) {
             compareWords();
-            if (winner !== true) {
-                messageEl.textContent = `Game Over. The correct word is ${winningWord}`;
-            }
+            checkWinner();
         }
     })
 
