@@ -114,18 +114,6 @@ startButtonEl.addEventListener('click', () => {
 
 // Game finds if any letters are the same as the winning word and if they are in the same position
 const compareWords = () => {
-    // for (let char of userArray) {
-    //     for (let i = 0; i < winningWordArray.length; i++) {
-    //         if (char === winningWordArray[i]) {
-    //             for (let j = 0; j < wordleBoard[attempt].length; j++) {
-    //                 if (document.getElementById(wordleBoard[attempt][j]).textContent === char) {
-    //                     console.log(document.getElementById(wordleBoard[attempt][j]));
-    //                     document.getElementById(wordleBoard[attempt][j]).style.backgroundColor = "yellow";
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
     const wordEl = document.querySelector(`.${attempt}`);
     const lettersEl = wordEl.querySelectorAll('.letter');
 
@@ -148,20 +136,32 @@ const compareWords = () => {
     console.log("Correct positions: "+ correctPositionLetters);
     console.log("Contains letters: "+ containsLetters);
     lettersEl.forEach((letter) => {
-        if ((correctPositionLetters.includes(letter.textContent.toLowerCase())) && 
-        (userArray.indexOf(letter.textContent.toLowerCase()) === winningWordArray.indexOf(letter.textContent.toLowerCase()))) {
-            console.log((userArray.indexOf(letter.textContent.toLowerCase()) === winningWordArray.indexOf(letter.textContent.toLowerCase())));
+        if (correctPositionLetters.includes(letter.textContent.toLowerCase()) && parseInt(letter.id) % 5 === winningWordArray.indexOf(letter.textContent.toLowerCase())) {
             letter.style.backgroundColor = "green";
-            correctPositionLetters.shift();
-            console.log("Correct positions: "+ correctPositionLetters);
-            containsLetters.splice(containsLetters.indexOf(letter.textContent.toLowerCase()), 1);
-            console.log("Contains letters: "+ containsLetters);
-        } else if (containsLetters.includes(letter.textContent.toLowerCase())) {
-            letter.style.backgroundColor = "yellow";
-            containsLetters.shift();
-            console.log("Contains letters: "+ containsLetters);
+            if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
+                correctPositionLetters.shift();
+            }
+            // containsLetters.splice(containsLetters.indexOf(letter.textContent.toLowerCase()), 1);
+        } else if (containsLetters.includes(letter.textContent.toLowerCase()) /*&& letter.textContent.toLowerCase() !== userArray[i]*/) {
+            if (letter.style.backgroundColor !== "green") {
+                letter.style.backgroundColor = "yellow";
+            }
+            if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
+                containsLetters.shift();
+            }
         }
     })
+    // lettersEl.forEach((letter) => {
+    //     for (let i = 0; i < 5; i++) {
+    //     if (containsLetters.includes(letter.textContent.toLowerCase()) && letter.textContent.toLowerCase() !== userArray[i]) {
+    //         if (letter.style.backgroundColor !== "green") {
+    //             letter.style.backgroundColor = "yellow";
+    //         }
+    //         if (userArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
+    //             containsLetters.shift();
+    //         }
+    //     }}
+    // })
 }
 // User continues to guess for words down each row
 // If user finds word before the sixth row finishes, then user wins the game; loses if the user does not
