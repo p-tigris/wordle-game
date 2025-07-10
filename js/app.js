@@ -5,9 +5,11 @@ const startButtonEl = document.querySelector('#start');
 const messageEl = document.querySelector('#message');
 const gamePlayEl = document.querySelector('#game-play');
 
-const attempts = ["first", "second", "third", "fourth", "fifth", "sixth"];
+const attempts = ["first", "second", "third", "fourth", "fifth", "sixth", "gameOver"];
 let currentAttemptIndex = 0;
 let attempt = attempts[currentAttemptIndex];
+
+let winner;
 
 const keys = keyContainerEl.children;
 
@@ -55,6 +57,7 @@ const init = () => {
     attempt = attempts[currentAttemptIndex];
     charIndex = 0;
     userArray = [];
+    winner = false;
     messageEl.textContent = "Press Start Game to begin!"
 }
 
@@ -81,12 +84,17 @@ const render = () => {
     enterKeyEl.addEventListener('click', () => {
         if (messageEl.textContent === "Not an allowed word") {
             return;
-        } else if (userArray.length === 5 && currentAttemptIndex < 6) {
+        } else if (userArray.length === 5 && currentAttemptIndex < 5) {
             compareWords();
             currentAttemptIndex++;
             attempt = attempts[currentAttemptIndex];
             charIndex = 0;
             userArray = [];
+        } else if (currentAttemptIndex === 5) {
+            compareWords();
+            if (winner !== true) {
+                messageEl.textContent = `Game Over. The correct word is ${winningWord}`;
+            }
         }
     })
 
@@ -114,43 +122,46 @@ startButtonEl.addEventListener('click', () => {
 
 // Game finds if any letters are the same as the winning word and if they are in the same position
 const compareWords = () => {
-    const wordEl = document.querySelector(`.${attempt}`);
-    const lettersEl = wordEl.querySelectorAll('.letter');
+        const wordEl = document.querySelector(`.${attempt}`);
+        const lettersEl = wordEl.querySelectorAll('.letter');
 
-    if (userArray.every((char, index) => char === winningWordArray[index])) {
+
+        if (userArray.every((char, index) => char === winningWordArray[index])) {
+            lettersEl.forEach((letter) => {
+                letter.style.backgroundColor = "green";
+            })
+            winner = true;
+        }
+
+        const correctPositionLetters = [];
+        const containsLetters = [];
+
+        for (let i = 0; i < userArray.length; i++) {
+            if (userArray[i] === winningWordArray[i]) {
+                correctPositionLetters.push(userArray[i]);
+            } else if (winningWordArray.includes(userArray[i])) {
+                containsLetters.push(userArray[i]);
+            }
+        }
+        console.log("Correct positions: "+ correctPositionLetters);
+        console.log("Contains letters: "+ containsLetters);
         lettersEl.forEach((letter) => {
-            letter.style.backgroundColor = "green";
+            if (correctPositionLetters.includes(letter.textContent.toLowerCase()) && parseInt(letter.id) % 5 === winningWordArray.indexOf(letter.textContent.toLowerCase())) {
+                letter.style.backgroundColor = "green";
+                if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
+                    correctPositionLetters.shift();
+                }
+                // containsLetters.splice(containsLetters.indexOf(letter.textContent.toLowerCase()), 1);
+            } else if (containsLetters.includes(letter.textContent.toLowerCase()) /*&& letter.textContent.toLowerCase() !== userArray[i]*/) {
+                if (letter.style.backgroundColor !== "green") {
+                    letter.style.backgroundColor = "yellow";
+                }
+                if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
+                    containsLetters.shift();
+                }
+            }
         })
-    }
 
-    const correctPositionLetters = [];
-    const containsLetters = [];
-
-    for (let i = 0; i < userArray.length; i++) {
-        if (userArray[i] === winningWordArray[i]) {
-            correctPositionLetters.push(userArray[i]);
-        } else if (winningWordArray.includes(userArray[i])) {
-            containsLetters.push(userArray[i]);
-        }
-    }
-    console.log("Correct positions: "+ correctPositionLetters);
-    console.log("Contains letters: "+ containsLetters);
-    lettersEl.forEach((letter) => {
-        if (correctPositionLetters.includes(letter.textContent.toLowerCase()) && parseInt(letter.id) % 5 === winningWordArray.indexOf(letter.textContent.toLowerCase())) {
-            letter.style.backgroundColor = "green";
-            if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
-                correctPositionLetters.shift();
-            }
-            // containsLetters.splice(containsLetters.indexOf(letter.textContent.toLowerCase()), 1);
-        } else if (containsLetters.includes(letter.textContent.toLowerCase()) /*&& letter.textContent.toLowerCase() !== userArray[i]*/) {
-            if (letter.style.backgroundColor !== "green") {
-                letter.style.backgroundColor = "yellow";
-            }
-            if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
-                containsLetters.shift();
-            }
-        }
-    })
     // lettersEl.forEach((letter) => {
     //     for (let i = 0; i < 5; i++) {
     //     if (containsLetters.includes(letter.textContent.toLowerCase()) && letter.textContent.toLowerCase() !== userArray[i]) {
