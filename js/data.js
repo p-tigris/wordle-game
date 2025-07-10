@@ -36,5 +36,8 @@ export const wordList = [
     "asked",
     "going",
     "large",
-    "until"
+    "until",
+    "abate", // delete these three later
+    "abort",
+    "arbor"
 ]

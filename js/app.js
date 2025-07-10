@@ -114,6 +114,18 @@ startButtonEl.addEventListener('click', () => {
 
 // Game finds if any letters are the same as the winning word and if they are in the same position
 const compareWords = () => {
+    // for (let char of userArray) {
+    //     for (let i = 0; i < winningWordArray.length; i++) {
+    //         if (char === winningWordArray[i]) {
+    //             for (let j = 0; j < wordleBoard[attempt].length; j++) {
+    //                 if (document.getElementById(wordleBoard[attempt][j]).textContent === char) {
+    //                     console.log(document.getElementById(wordleBoard[attempt][j]));
+    //                     document.getElementById(wordleBoard[attempt][j]).style.backgroundColor = "yellow";
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
     const wordEl = document.querySelector(`.${attempt}`);
     const lettersEl = wordEl.querySelectorAll('.letter');
 
@@ -124,7 +136,7 @@ const compareWords = () => {
     }
 
     const correctPositionLetters = [];
-    let containsLetters = []
+    const containsLetters = [];
 
     for (let i = 0; i < userArray.length; i++) {
         if (userArray[i] === winningWordArray[i]) {
@@ -133,15 +145,21 @@ const compareWords = () => {
             containsLetters.push(userArray[i]);
         }
     }
-    // console.log(correctPositionLetters);
+    console.log("Correct positions: "+ correctPositionLetters);
+    console.log("Contains letters: "+ containsLetters);
     lettersEl.forEach((letter) => {
-        // console.log(letter.textContent);
-        if (correctPositionLetters.includes(letter.textContent.toLowerCase())) {
+        if ((correctPositionLetters.includes(letter.textContent.toLowerCase())) && 
+        (userArray.indexOf(letter.textContent.toLowerCase()) === winningWordArray.indexOf(letter.textContent.toLowerCase()))) {
+            console.log((userArray.indexOf(letter.textContent.toLowerCase()) === winningWordArray.indexOf(letter.textContent.toLowerCase())));
             letter.style.backgroundColor = "green";
             correctPositionLetters.shift();
+            console.log("Correct positions: "+ correctPositionLetters);
+            containsLetters.splice(containsLetters.indexOf(letter.textContent.toLowerCase()), 1);
+            console.log("Contains letters: "+ containsLetters);
         } else if (containsLetters.includes(letter.textContent.toLowerCase())) {
             letter.style.backgroundColor = "yellow";
             containsLetters.shift();
+            console.log("Contains letters: "+ containsLetters);
         }
     })
 }
