@@ -125,7 +125,15 @@ const compareWords = () => {
     //         }
     //     }
     // }
-    if (userArray.every((char, index) => char === winningWordArray[index]))
+    const wordEl = document.querySelector(`.${attempt}`);
+    console.log(wordEl);
+    const lettersEl = wordEl.querySelectorAll('.letter');
+
+    if (userArray.every((char, index) => char === winningWordArray[index])) {
+        lettersEl.forEach((letter) => {
+            letter.style.backgroundColor = "green";
+        })
+    }
 }
 // User continues to guess for words down each row
 // If user finds word before the sixth row finishes, then user wins the game; loses if the user does not
