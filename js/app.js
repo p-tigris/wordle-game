@@ -1,7 +1,6 @@
-import { keyContainerEl, backspaceKeyEl, enterKeyEl } from "./setup.js";
+import { startButtonEl, keyContainerEl, backspaceKeyEl, enterKeyEl, restartButtonEl } from "./setup.js";
 import { wordList } from "./data.js";
 
-const startButtonEl = document.querySelector('#start');
 const messageEl = document.querySelector('#message');
 const gamePlayEl = document.querySelector('#game-play');
 
@@ -38,7 +37,7 @@ const checkRealWord = () => {
             } 
         }
     if (isRealWord === false) {
-        messageEl.textContent = "Not an allowed word"
+        messageEl.textContent = "Not an allowed word";
         return;
     }
     }
@@ -48,8 +47,11 @@ const checkWinner = () => {
     if (winner === true) {
         messageEl.textContent = `Congratulations! ${winningWord.toUpperCase()} is the correct word!`;
         keyContainerEl.remove();
+        gamePlayEl.appendChild(restartButtonEl);
     } else if (winner !== true && currentAttemptIndex === 5) {
         messageEl.textContent = `Game Over. The correct word is ${winningWord.toUpperCase()}`;
+        keyContainerEl.remove();
+        gamePlayEl.appendChild(restartButtonEl);
     }
 }
 
@@ -67,6 +69,7 @@ const init = () => {
     charIndex = 0;
     userArray = [];
     winner = false;
+    gamePlayEl.appendChild(startButtonEl);
     messageEl.textContent = "Press Start Game to begin!"
 }
 
@@ -184,3 +187,8 @@ const compareWords = () => {
 }
 // User continues to guess for words down each row
 // If user finds word before the sixth row finishes, then user wins the game; loses if the user does not
+// Restart game if user wishes
+restartButtonEl.addEventListener('click', () => {
+    restartButtonEl.remove();
+    init();
+});

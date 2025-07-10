@@ -1,3 +1,6 @@
+export const startButtonEl = document.createElement('button');
+startButtonEl.textContent = "Start Game";
+
 export const keyContainerEl = document.createElement('div')
 
 const lettersOfAlphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -20,3 +23,6 @@ enterKeyEl.textContent = "ENTER";
 
 keyContainerEl.style.display = "grid";
 keyContainerEl.style.gridTemplateColumns = "repeat(5, 75px)";
+
+export const restartButtonEl = document.createElement('button');
+restartButtonEl.textContent = "Return Home";
