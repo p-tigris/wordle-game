@@ -137,7 +137,7 @@ startButtonEl.addEventListener('click', () => {
 const compareWords = () => {
         const wordEl = document.querySelector(`.${attempt}`);
         const lettersEl = wordEl.querySelectorAll('.letter');
-
+        const keysEl = document.querySelectorAll('#key');
 
         if (userArray.every((char, index) => char === winningWordArray[index])) {
             lettersEl.forEach((letter) => {
@@ -148,14 +148,24 @@ const compareWords = () => {
 
         const correctPositionLetters = [];
         const containsLetters = [];
+        const lettersNotContained = [];
 
         for (let i = 0; i < userArray.length; i++) {
             if (userArray[i] === winningWordArray[i]) {
                 correctPositionLetters.push(userArray[i]);
             } else if (winningWordArray.includes(userArray[i])) {
                 containsLetters.push(userArray[i]);
+            } else {
+                lettersNotContained.push(userArray[i]);
             }
         }
+        
+        keysEl.forEach((key) => {
+            if (lettersNotContained.includes(key.textContent)) {
+                key.style.backgroundColor = "gray";
+            }
+        })
+
         console.log("Correct positions: "+ correctPositionLetters);
         console.log("Contains letters: "+ containsLetters);
         lettersEl.forEach((letter) => {

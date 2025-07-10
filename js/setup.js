@@ -8,6 +8,7 @@ const lettersOfAlphabet = "abcdefghijklmnopqrstuvwxyz";
 for (let letter of lettersOfAlphabet) {
     const keyEl = document.createElement('button');
     keyEl.textContent = letter;
+    keyEl.id = "key";
     keyContainerEl.appendChild(keyEl);
 }
 
