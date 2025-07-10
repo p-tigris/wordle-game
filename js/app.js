@@ -144,46 +144,47 @@ const compareWords = () => {
                 letter.style.backgroundColor = "green";
             })
             winner = true;
+        } else {
+
+            const correctPositionLetters = [];
+            const containsLetters = [];
+            const lettersNotContained = [];
+
+            for (let i = 0; i < userArray.length; i++) {
+                if (userArray[i] === winningWordArray[i]) {
+                    correctPositionLetters.push(userArray[i]);
+                } else if (winningWordArray.includes(userArray[i])) {
+                    containsLetters.push(userArray[i]);
+                } else {
+                    lettersNotContained.push(userArray[i]);
+                }
+            }
+            
+            keysEl.forEach((key) => {
+                if (lettersNotContained.includes(key.textContent)) {
+                    key.style.backgroundColor = "gray";
+                }
+            })
+
+            console.log("Correct positions: "+ correctPositionLetters);
+            console.log("Contains letters: "+ containsLetters);
+            lettersEl.forEach((letter) => {
+                if (correctPositionLetters.includes(letter.textContent.toLowerCase()) && parseInt(letter.id) % 5 === winningWordArray.indexOf(letter.textContent.toLowerCase())) {
+                    letter.style.backgroundColor = "green";
+                    if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
+                        correctPositionLetters.shift();
+                    }
+                    // containsLetters.splice(containsLetters.indexOf(letter.textContent.toLowerCase()), 1);
+                } else if (containsLetters.includes(letter.textContent.toLowerCase()) /*&& letter.textContent.toLowerCase() !== userArray[i]*/) {
+                    if (letter.style.backgroundColor !== "green") {
+                        letter.style.backgroundColor = "yellow";
+                    }
+                    if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
+                        containsLetters.shift();
+                    }
+                }
+            })
         }
-
-        const correctPositionLetters = [];
-        const containsLetters = [];
-        const lettersNotContained = [];
-
-        for (let i = 0; i < userArray.length; i++) {
-            if (userArray[i] === winningWordArray[i]) {
-                correctPositionLetters.push(userArray[i]);
-            } else if (winningWordArray.includes(userArray[i])) {
-                containsLetters.push(userArray[i]);
-            } else {
-                lettersNotContained.push(userArray[i]);
-            }
-        }
-        
-        keysEl.forEach((key) => {
-            if (lettersNotContained.includes(key.textContent)) {
-                key.style.backgroundColor = "gray";
-            }
-        })
-
-        console.log("Correct positions: "+ correctPositionLetters);
-        console.log("Contains letters: "+ containsLetters);
-        lettersEl.forEach((letter) => {
-            if (correctPositionLetters.includes(letter.textContent.toLowerCase()) && parseInt(letter.id) % 5 === winningWordArray.indexOf(letter.textContent.toLowerCase())) {
-                letter.style.backgroundColor = "green";
-                if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
-                    correctPositionLetters.shift();
-                }
-                // containsLetters.splice(containsLetters.indexOf(letter.textContent.toLowerCase()), 1);
-            } else if (containsLetters.includes(letter.textContent.toLowerCase()) /*&& letter.textContent.toLowerCase() !== userArray[i]*/) {
-                if (letter.style.backgroundColor !== "green") {
-                    letter.style.backgroundColor = "yellow";
-                }
-                if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
-                    containsLetters.shift();
-                }
-            }
-        })
 
     // lettersEl.forEach((letter) => {
     //     for (let i = 0; i < 5; i++) {
