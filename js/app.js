@@ -43,7 +43,8 @@ const checkRealWord = () => {
 }
 
 // Game selects a random word as the winning word from a data array
-const winningWord = wordList[Math.floor(Math.random() * wordList.length)];
+// const winningWord = wordList[Math.floor(Math.random() * wordList.length)];
+const winningWord = "after";
 const winningWordArray = winningWord.split("");
 
 console.log(winningWord);
@@ -113,20 +114,7 @@ startButtonEl.addEventListener('click', () => {
 
 // Game finds if any letters are the same as the winning word and if they are in the same position
 const compareWords = () => {
-    // for (let char of userArray) {
-    //     for (let i = 0; i < winningWordArray.length; i++) {
-    //         if (char === winningWordArray[i]) {
-    //             for (let j = 0; j < wordleBoard[attempt].length; j++) {
-    //                 if (document.getElementById(wordleBoard[attempt][j]).textContent === char) {
-    //                     console.log(document.getElementById(wordleBoard[attempt][j]));
-    //                     document.getElementById(wordleBoard[attempt][j]).style.backgroundColor = "yellow";
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
     const wordEl = document.querySelector(`.${attempt}`);
-    console.log(wordEl);
     const lettersEl = wordEl.querySelectorAll('.letter');
 
     if (userArray.every((char, index) => char === winningWordArray[index])) {
@@ -134,6 +122,28 @@ const compareWords = () => {
             letter.style.backgroundColor = "green";
         })
     }
+
+    const correctPositionLetters = [];
+    let containsLetters = []
+
+    for (let i = 0; i < userArray.length; i++) {
+        if (userArray[i] === winningWordArray[i]) {
+            correctPositionLetters.push(userArray[i]);
+        } else if (winningWordArray.includes(userArray[i])) {
+            containsLetters.push(userArray[i]);
+        }
+    }
+    // console.log(correctPositionLetters);
+    lettersEl.forEach((letter) => {
+        // console.log(letter.textContent);
+        if (correctPositionLetters.includes(letter.textContent.toLowerCase())) {
+            letter.style.backgroundColor = "green";
+            correctPositionLetters.shift();
+        } else if (containsLetters.includes(letter.textContent.toLowerCase())) {
+            letter.style.backgroundColor = "yellow";
+            containsLetters.shift();
+        }
+    })
 }
 // User continues to guess for words down each row
 // If user finds word before the sixth row finishes, then user wins the game; loses if the user does not
