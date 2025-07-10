@@ -184,6 +184,8 @@ const compareWords = () => {
                     if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
                         containsLetters.shift();
                     }
+                } else if (lettersNotContained.includes(letter.textContent.toLowerCase())) {
+                    letter.style.backgroundColor = "gray";
                 }
             })
         }
