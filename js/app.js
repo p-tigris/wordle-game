@@ -163,20 +163,20 @@ const compareWords = () => {
         letter.style.backgroundColor = backgroundColors[index];
     })
 
-    keysEl.forEach((key) => {
-        const grayLetters = [];
-        const greenLetters = [];
-        const yellowLetters = [];
-        lettersEl.forEach((letter) => {
-            if (letter.style.backgroundColor === "gray") {
-                grayLetters.push(letter.textContent);
-            } else if (letter.style.backgroundColor === "green") {
-                greenLetters.push(letter.textContent);
-            } else {
-                yellowLetters.push(letter.textContent);
-            }
-        })
+    const grayLetters = [];
+    const greenLetters = [];
+    const yellowLetters = [];
+    lettersEl.forEach((letter) => {
+        if (letter.style.backgroundColor === "gray") {
+            grayLetters.push(letter.textContent);
+        } else if (letter.style.backgroundColor === "green") {
+            greenLetters.push(letter.textContent);
+        } else {
+            yellowLetters.push(letter.textContent);
+        }
+    })
 
+    keysEl.forEach((key) => {
         if (greenLetters.includes(key.textContent.toUpperCase())) {
             key.style.backgroundColor = "green";
         } else if (yellowLetters.includes(key.textContent.toUpperCase())) {
