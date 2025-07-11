@@ -165,23 +165,24 @@ const compareWords = () => {
 
     keysEl.forEach((key) => {
         const grayLetters = [];
-        const nonGrayLetters = [];
+        const greenLetters = [];
+        const yellowLetters = [];
         lettersEl.forEach((letter) => {
             if (letter.style.backgroundColor === "gray") {
                 grayLetters.push(letter.textContent);
+            } else if (letter.style.backgroundColor === "green") {
+                greenLetters.push(letter.textContent);
             } else {
-                nonGrayLetters.push(letter.textContent);
+                yellowLetters.push(letter.textContent);
             }
         })
-        for (let i = 0; i < grayLetters.length; i++) {
-            if (nonGrayLetters.includes(grayLetters[i])) {
-                grayLetters.splice(i, 1, null);
-            }
-        }
-        for (let letter of grayLetters) {
-            if (key.textContent.toUpperCase() === letter) {
-                key.style.backgroundColor = "gray";
-            }
+
+        if (greenLetters.includes(key.textContent.toUpperCase())) {
+            key.style.backgroundColor = "green";
+        } else if (yellowLetters.includes(key.textContent.toUpperCase())) {
+            key.style.backgroundColor = "yellow";
+        } else if (grayLetters.includes(key.textContent.toUpperCase())) {
+            key.style.backgroundColor = "gray";
         }
     })
 
