@@ -68,7 +68,8 @@ const init = () => {
             document.getElementById(wordleBoard[attempt][i]).textContent = "";
         }
     }
-    winningWord = wordList[Math.floor(Math.random() * wordList.length)];
+    // winningWord = wordList[Math.floor(Math.random() * wordList.length)];
+    winningWord = "might";
     winningWordArray = winningWord.split("");
     console.log(winningWord);
     console.log(winningWordArray);
@@ -180,7 +181,9 @@ const compareWords = () => {
         if (greenLetters.includes(key.textContent.toUpperCase())) {
             key.style.backgroundColor = "green";
         } else if (yellowLetters.includes(key.textContent.toUpperCase())) {
-            key.style.backgroundColor = "yellow";
+            if (key.style.backgroundColor !== "green") {
+                key.style.backgroundColor = "yellow";
+            }
         } else if (grayLetters.includes(key.textContent.toUpperCase())) {
             key.style.backgroundColor = "gray";
         }
