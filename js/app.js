@@ -137,71 +137,139 @@ startButtonEl.addEventListener('click', () => {
 
 // Game finds if any letters are the same as the winning word and if they are in the same position
 const compareWords = () => {
-        const wordEl = document.querySelector(`.${attempt}`);
-        const lettersEl = wordEl.querySelectorAll('.letter');
-        const keysEl = document.querySelectorAll('.key');
+    const wordEl = document.querySelector(`.${attempt}`);
+    const lettersEl = wordEl.querySelectorAll('.letter');
+    const keysEl = document.querySelectorAll('.key');
 
-        if (userArray.every((char, index) => char === winningWordArray[index])) {
-            lettersEl.forEach((letter) => {
-                letter.style.backgroundColor = "green";
-            })
-            winner = true;
-        } else {
+    const winningArrayCopy = winningWordArray;
+    const backgroundColors = ["gray", "gray", "gray", "gray", "gray"]
 
-            const correctPositionLetters = [];
-            const containsLetters = [];
-            const lettersNotContained = [];
-
-            for (let i = 0; i < userArray.length; i++) {
-                if (userArray[i] === winningWordArray[i]) {
-                    correctPositionLetters.push(userArray[i]);
-                } else if (winningWordArray.includes(userArray[i])) {
-                    containsLetters.push(userArray[i]);
-                } else {
-                    lettersNotContained.push(userArray[i]);
-                }
-            }
-            
-            keysEl.forEach((key) => {
-                if (lettersNotContained.includes(key.textContent)) {
-                    key.style.backgroundColor = "gray";
-                }
-            })
-
-            console.log("Correct positions: "+ correctPositionLetters);
-            console.log("Contains letters: "+ containsLetters);
-            lettersEl.forEach((letter) => {
-                if (correctPositionLetters.includes(letter.textContent.toLowerCase()) && parseInt(letter.id) % 5 === winningWordArray.indexOf(letter.textContent.toLowerCase())) {
-                    letter.style.backgroundColor = "green";
-                    if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
-                        correctPositionLetters.shift();
-                    }
-                    // containsLetters.splice(containsLetters.indexOf(letter.textContent.toLowerCase()), 1);
-                } else if (containsLetters.includes(letter.textContent.toLowerCase()) /*&& letter.textContent.toLowerCase() !== userArray[i]*/) {
-                    if (letter.style.backgroundColor !== "green") {
-                        letter.style.backgroundColor = "yellow";
-                    }
-                    if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
-                        containsLetters.shift();
-                    }
-                } else if (lettersNotContained.includes(letter.textContent.toLowerCase())) {
-                    letter.style.backgroundColor = "gray";
-                }
-            })
+    for (let i = 0; i < userArray.length; i++) {
+        if (userArray[i] === winningArrayCopy[i]) {
+            backgroundColors[i] = "green";
+            winningArrayCopy.splice(i, 1, null);
+            userArray.splice(i, 1, null);
         }
+    }
 
-    // lettersEl.forEach((letter) => {
-    //     for (let i = 0; i < 5; i++) {
-    //     if (containsLetters.includes(letter.textContent.toLowerCase()) && letter.textContent.toLowerCase() !== userArray[i]) {
-    //         if (letter.style.backgroundColor !== "green") {
-    //             letter.style.backgroundColor = "yellow";
-    //         }
-    //         if (userArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
-    //             containsLetters.shift();
-    //         }
-    //     }}
-    // })
-}
+    for (let i = 0; i < userArray.length; i++) {
+        if (winningArrayCopy.includes(userArray[i]) && userArray[i] !== null) {
+            backgroundColors[userArray.indexOf(userArray[i])] = "yellow";
+            winningArrayCopy.splice(i, 1, null);
+        }
+    }
+
+    lettersEl.forEach((letter, index) => {
+        letter.style.backgroundColor = backgroundColors[index];
+    })
+
+    if (userArray.every((char, index) => char === winningArrayCopy[index])) {
+        winner = true;
+    }
+
+//     const letterStates = Array(5).fill("gray");
+//     const usedIndices = [];
+
+//     // First pass: mark correct letters in correct positions (green)
+//     for (let i = 0; i < 5; i++) {
+//         if (userArray[i] === winningWordArray[i]) {
+//             letterStates[i] = "green";
+//             usedIndices.push(i);
+//         }
+//     }
+
+//     // Second pass: mark correct letters in wrong positions (yellow)
+//     for (let i = 0; i < 5; i++) {
+//         if (letterStates[i] === "gray") {
+//             for (let j = 0; j < 5; j++) {
+//                 if (!usedIndices.includes(j) && userArray[i] === winningWordArray[j]) {
+//                     letterStates[i] = "yellow";
+//                     usedIndices.push(j);
+//                     break;
+//                 }
+//             }
+//         }
+//     }
+
+//     // Apply colors to board
+//     lettersEl.forEach((letter, i) => {
+//         letter.style.backgroundColor = letterStates[i];
+//     });
+
+//     // Update keyboard colors
+//     keysEl.forEach((key) => {
+//         const keyChar = key.textContent.toLowerCase();
+//         for (let i = 0; i < 5; i++) {
+//             if (userArray[i].toLowerCase() === keyChar) {
+//                 if (letterStates[i] === "green") {
+//                     key.style.backgroundColor = "green";
+//                 } else if (letterStates[i] === "yellow" && key.style.backgroundColor !== "green") {
+//                     key.style.backgroundColor = "yellow";
+//                 } else if (letterStates[i] === "gray" && key.style.backgroundColor !== "green" && key.style.backgroundColor !== "yellow") {
+//                     key.style.backgroundColor = "gray";
+//                 }
+//             }
+//         }
+//     });
+
+//     // Check for win
+//     if (letterStates.every(state => state === "green")) {
+//         winner = true;
+//     }
+};
+
+        // const wordEl = document.querySelector(`.${attempt}`);
+        // const lettersEl = wordEl.querySelectorAll('.letter');
+        // const keysEl = document.querySelectorAll('.key');
+
+        // if (userArray.every((char, index) => char === winningWordArray[index])) {
+        //     lettersEl.forEach((letter) => {
+        //         letter.style.backgroundColor = "green";
+        //     })
+        //     winner = true;
+        // } else {
+
+        //     const correctPositionLetters = [];
+        //     const containsLetters = [];
+        //     const lettersNotContained = [];
+
+        //     for (let i = 0; i < userArray.length; i++) {
+        //         if (userArray[i] === winningWordArray[i]) {
+        //             correctPositionLetters.push(userArray[i]);
+        //         } else if (winningWordArray.includes(userArray[i])) {
+        //             containsLetters.push(userArray[i]);
+        //         } else {
+        //             lettersNotContained.push(userArray[i]);
+        //         }
+        //     }
+            
+        //     keysEl.forEach((key) => {
+        //         if (lettersNotContained.includes(key.textContent)) {
+        //             key.style.backgroundColor = "gray";
+        //         }
+        //     })
+
+        //     console.log("Correct positions: "+ correctPositionLetters);
+        //     console.log("Contains letters: "+ containsLetters);
+        //     lettersEl.forEach((letter) => {
+        //         if (correctPositionLetters.includes(letter.textContent.toLowerCase()) && parseInt(letter.id) % 5 === winningWordArray.indexOf(letter.textContent.toLowerCase())) {
+        //             letter.style.backgroundColor = "green";
+        //             if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
+        //                 correctPositionLetters.shift();
+        //             }
+        //             // containsLetters.splice(containsLetters.indexOf(letter.textContent.toLowerCase()), 1);
+        //         } else if (containsLetters.includes(letter.textContent.toLowerCase()) /*&& letter.textContent.toLowerCase() !== userArray[i]*/) {
+        //             if (letter.style.backgroundColor !== "green") {
+        //                 letter.style.backgroundColor = "yellow";
+        //             }
+        //             if (winningWordArray.filter((char) => char === letter.textContent.toLowerCase()).length === 1) {
+        //                 containsLetters.shift();
+        //             }
+        //         } else if (lettersNotContained.includes(letter.textContent.toLowerCase())) {
+        //             letter.style.backgroundColor = "gray";
+        //         }
+        //     })
+        // }
 // User continues to guess for words down each row
 // If user finds word before the sixth row finishes, then user wins the game; loses if the user does not
 // Restart game if user wishes
