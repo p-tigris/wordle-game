@@ -56,12 +56,8 @@ const checkWinner = () => {
 }
 
 // Game selects a random word as the winning word from a data array
-// const winningWord = wordList[Math.floor(Math.random() * wordList.length)];
-const winningWord = "after";
-const winningWordArray = winningWord.split("");
-
-console.log(winningWord);
-console.log(winningWordArray);
+let winningWord;
+let winningWordArray;
 
 console.log(wordleBoard[attempt]);
 // Game initializes game board
@@ -72,6 +68,10 @@ const init = () => {
             document.getElementById(wordleBoard[attempt][i]).textContent = "";
         }
     }
+    winningWord = wordList[Math.floor(Math.random() * wordList.length)];
+    winningWordArray = winningWord.split("");
+    console.log(winningWord);
+    console.log(winningWordArray);
     currentAttemptIndex = 0;
     attempt = attempts[currentAttemptIndex];
     charIndex = 0;
@@ -154,8 +154,8 @@ const compareWords = () => {
 
     for (let i = 0; i < userArray.length; i++) {
         if (winningArrayCopy.includes(userArray[i]) && userArray[i] !== null) {
-            backgroundColors[userArray.indexOf(userArray[i])] = "yellow";
-            winningArrayCopy.splice(i, 1, null);
+            backgroundColors[/*userArray.indexOf(userArray[i])*/i] = "yellow";
+            userArray.splice(i, 1, null);
         }
     }
 
@@ -189,56 +189,6 @@ const compareWords = () => {
     if (userArray.every((char, index) => char === winningArrayCopy[index])) {
         winner = true;
     }
-
-//     const letterStates = Array(5).fill("gray");
-//     const usedIndices = [];
-
-//     // First pass: mark correct letters in correct positions (green)
-//     for (let i = 0; i < 5; i++) {
-//         if (userArray[i] === winningWordArray[i]) {
-//             letterStates[i] = "green";
-//             usedIndices.push(i);
-//         }
-//     }
-
-//     // Second pass: mark correct letters in wrong positions (yellow)
-//     for (let i = 0; i < 5; i++) {
-//         if (letterStates[i] === "gray") {
-//             for (let j = 0; j < 5; j++) {
-//                 if (!usedIndices.includes(j) && userArray[i] === winningWordArray[j]) {
-//                     letterStates[i] = "yellow";
-//                     usedIndices.push(j);
-//                     break;
-//                 }
-//             }
-//         }
-//     }
-
-//     // Apply colors to board
-//     lettersEl.forEach((letter, i) => {
-//         letter.style.backgroundColor = letterStates[i];
-//     });
-
-//     // Update keyboard colors
-//     keysEl.forEach((key) => {
-//         const keyChar = key.textContent.toLowerCase();
-//         for (let i = 0; i < 5; i++) {
-//             if (userArray[i].toLowerCase() === keyChar) {
-//                 if (letterStates[i] === "green") {
-//                     key.style.backgroundColor = "green";
-//                 } else if (letterStates[i] === "yellow" && key.style.backgroundColor !== "green") {
-//                     key.style.backgroundColor = "yellow";
-//                 } else if (letterStates[i] === "gray" && key.style.backgroundColor !== "green" && key.style.backgroundColor !== "yellow") {
-//                     key.style.backgroundColor = "gray";
-//                 }
-//             }
-//         }
-//     });
-
-//     // Check for win
-//     if (letterStates.every(state => state === "green")) {
-//         winner = true;
-//     }
 };
 
 // User continues to guess for words down each row
