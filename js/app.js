@@ -47,13 +47,13 @@ const start = () => {
     messageEl.textContent = "";
 };
 
-const keysFunction = (key) => {
+const keysFunction = (keyEl) => {
     if (charIndex < 5 && currentAttemptIndex < 6) {
-        userArray.push(key.textContent.toLowerCase());
+        userArray.push(keyEl.textContent.toLowerCase());
         if (userArray.length === 5) {
             checkRealWord();
         }
-        document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = key.textContent;
+        document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = keyEl.textContent;
         charIndex++;
     }
 };
