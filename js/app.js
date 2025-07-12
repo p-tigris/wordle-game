@@ -38,14 +38,14 @@ const checkRealWord = () => {
 }
 
 const checkWinner = () => {
-    if (winner === true) {
-        messageEl.textContent = `Congratulations! ${winningWord.toUpperCase()} is the correct word!`;
+    if (winner || (winner !== true && currentAttemptIndex === 5)) {
         keyContainerEl.remove();
         gamePlayEl.appendChild(restartButtonEl);
+    }
+    if (winner) {
+        messageEl.textContent = `Congratulations! ${winningWord.toUpperCase()} is the correct word!`;
     } else if (winner !== true && currentAttemptIndex === 5) {
         messageEl.textContent = `Game Over. The correct word is ${winningWord.toUpperCase()}`;
-        keyContainerEl.remove();
-        gamePlayEl.appendChild(restartButtonEl);
     }
 }
 
