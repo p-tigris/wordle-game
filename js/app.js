@@ -8,11 +8,8 @@ const attempts = ["first", "second", "third", "fourth", "fifth", "sixth"];
 let currentAttemptIndex = 0;
 let attempt = attempts[currentAttemptIndex];
 
-// const rowEl = document.querySelector(`.${attempt}`);
-// const charEl = rowEl.querySelectorAll(".letter");
-
-// console.log(rowEl);
-// console.log(charEl);
+    const wordEl = document.querySelector(`.${attempt}`);
+    const lettersEl = wordEl.querySelectorAll('.letter');
 const squaresEl = document.querySelectorAll(".letter");
 
 let winner;
@@ -21,14 +18,14 @@ let winner;
 const keysEl = keyContainerEl.querySelectorAll(".key");
 console.log(keysEl);
 
-const wordleBoard = {
-        "first": ["0", "1", "2", "3", "4"], 
-        "second": ["5", "6", "7", "8", "9"], 
-        "third": ["10", "11", "12", "13", "14"], 
-        "fourth": ["15", "16", "17", "18", "19"], 
-        "fifth": ["20", "21", "22", "23", "24"], 
-        "sixth": ["25", "26", "27", "28", "29"],
-};
+// const wordleBoard = {
+//         "first": ["0", "1", "2", "3", "4"], 
+//         "second": ["5", "6", "7", "8", "9"], 
+//         "third": ["10", "11", "12", "13", "14"], 
+//         "fourth": ["15", "16", "17", "18", "19"], 
+//         "fifth": ["20", "21", "22", "23", "24"], 
+//         "sixth": ["25", "26", "27", "28", "29"],
+// };
 
 let userArray = [];
 let charIndex;
@@ -82,7 +79,7 @@ const init = () => {
     }
 
     // winningWord = wordList[Math.floor(Math.random() * wordList.length)];
-    winningWord = "might";
+    winningWord = "water";
     winningWordArray = winningWord.split("");
     console.log(winningWord);
     console.log(winningWordArray);
@@ -105,7 +102,12 @@ for (let i = 0; i < keysEl.length; i++) {
             if (userArray.length === 5) {
                 checkRealWord();
             }
-            document.getElementById(wordleBoard[attempt][charIndex]).textContent = keysEl[i].textContent;
+            // const wordEl = document.querySelector(`.${attempt}`);
+            // const lettersEl = wordEl.querySelectorAll('.letter');
+            // document.getElementById(wordleBoard[attempt][charIndex]).textContent = keysEl[i].textContent;
+            // squaresEl[charIndex].textContent = keysEl[i].textContent;
+            // lettersEl[charIndex].textContent = keysEl[i].textContent;
+            document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = keysEl[i].textContent;
             charIndex++;
             console.log(userArray);
         }
@@ -135,7 +137,10 @@ backspaceKeyEl.addEventListener('click', () => {
     if (charIndex > 0) {
         userArray.pop();
         charIndex--;
-        document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
+        // document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
+        // squaresEl[charIndex].textContent = "";
+        // lettersEl[charIndex].textContent = "";
+        document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = "";
     }
 })
 
