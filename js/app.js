@@ -47,7 +47,7 @@ const start = () => {
     messageEl.textContent = "";
 };
 
-const keysFunction = (keyEl) => {
+const keys = (keyEl) => {
     if (charIndex < 5 && currentAttemptIndex < 6) {
         userArray.push(keyEl.textContent.toLowerCase());
         if (userArray.length === 5) {
@@ -188,7 +188,7 @@ startButtonEl.addEventListener('click', start);
 
 keysEl.forEach((key) => {
     key.addEventListener('click', () => {
-        keysFunction(key);
+        keys(key);
     })
 });
 
