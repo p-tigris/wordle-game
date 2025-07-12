@@ -3,15 +3,6 @@ startButtonEl.textContent = "Start Game";
 
 export const keyContainerEl = document.createElement('div')
 
-// const lettersOfAlphabet = "abcdefghijklmnopqrstuvwxyz";
-
-// for (let letter of lettersOfAlphabet) {
-//     const keyEl = document.createElement('button');
-//     keyEl.textContent = letter;
-//     keyEl.classList.add("key");
-//     keyContainerEl.appendChild(keyEl);
-// }
-
 const firstRowLetters = "QWERTYUIOP";
 const secondRowLetters = "ASDFGHJKL";
 const thirdRowLetters = "ZXCVBNM";
