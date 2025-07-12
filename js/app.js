@@ -162,16 +162,15 @@ backspaceKeyEl.addEventListener('click', () => {
 submitKeyEl.addEventListener('click', () => {
     if (messageEl.textContent === "Not an allowed word") {
         return;
-    } else if (userArray.length === 5 && currentAttemptIndex < 5) {
+    } else if (userArray.length === 5) {
         compareWords();
         checkWinner();
-        currentAttemptIndex++;
-        attempt = attempts[currentAttemptIndex];
-        charIndex = 0;
-        userArray = [];
-    } else if (currentAttemptIndex === 5) {
-        compareWords();
-        checkWinner();
+        if (currentAttemptIndex < 5) {
+            currentAttemptIndex++;
+            attempt = attempts[currentAttemptIndex];
+            charIndex = 0;
+            userArray = [];
+        }
     }
 })
 
