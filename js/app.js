@@ -10,7 +10,9 @@ let attempt = attempts[currentAttemptIndex];
 
 let winner;
 
-const keys = keyContainerEl.children;
+// const keys = keyContainerEl.children;
+const keysEl = keyContainerEl.querySelectorAll(".key");
+console.log(keysEl);
 
 const wordleBoard = {
         "first": ["0", "1", "2", "3", "4"], 
@@ -85,14 +87,14 @@ const init = () => {
 document.addEventListener('DOMContentLoaded', init);
 // User inputs letters for a word in the first row
 
-for (let i = 0; i < keys.length - 2; i++) {
-    keys[i].addEventListener('click', () => {
+for (let i = 0; i < keysEl.length; i++) {
+    keysEl[i].addEventListener('click', () => {
         if (charIndex < 5 && currentAttemptIndex < 6) {
-            userArray.push(keys[i].textContent);
+            userArray.push(keysEl[i].textContent.toLowerCase());
             if (userArray.length === 5) {
                 checkRealWord();
             }
-            document.getElementById(wordleBoard[attempt][charIndex]).textContent = keys[i].textContent.toUpperCase();
+            document.getElementById(wordleBoard[attempt][charIndex]).textContent = keysEl[i].textContent.toUpperCase();
             charIndex++;
             console.log(userArray);
         }
@@ -140,7 +142,7 @@ startButtonEl.addEventListener('click', () => {
 const compareWords = () => {
     const wordEl = document.querySelector(`.${attempt}`);
     const lettersEl = wordEl.querySelectorAll('.letter');
-    const keysEl = document.querySelectorAll('.key');
+    // const keysEl = document.querySelectorAll('.key');
 
     const winningArrayCopy = winningWord.split("");
     const backgroundColors = ["gray", "gray", "gray", "gray", "gray"]
@@ -155,9 +157,9 @@ const compareWords = () => {
 
     for (let i = 0; i < userArray.length; i++) {
         if (winningArrayCopy.includes(userArray[i]) && userArray[i] !== null) {
-            backgroundColors[/*userArray.indexOf(userArray[i])*/i] = "yellow";
+            backgroundColors[i] = "yellow";
             winningArrayCopy.splice(winningArrayCopy.indexOf(userArray[i]), 1, null);
-            userArray.splice(i, 1, null);
+            // userArray.splice(i, 1, null);
         }
     }
 
