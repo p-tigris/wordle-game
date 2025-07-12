@@ -8,24 +8,12 @@ const attempts = ["first", "second", "third", "fourth", "fifth", "sixth"];
 let currentAttemptIndex = 0;
 let attempt = attempts[currentAttemptIndex];
 
-    const wordEl = document.querySelector(`.${attempt}`);
-    const lettersEl = wordEl.querySelectorAll('.letter');
 const squaresEl = document.querySelectorAll(".letter");
 
 let winner;
 
-// const keys = keyContainerEl.children;
 const keysEl = keyContainerEl.querySelectorAll(".key");
 console.log(keysEl);
-
-// const wordleBoard = {
-//         "first": ["0", "1", "2", "3", "4"], 
-//         "second": ["5", "6", "7", "8", "9"], 
-//         "third": ["10", "11", "12", "13", "14"], 
-//         "fourth": ["15", "16", "17", "18", "19"], 
-//         "fifth": ["20", "21", "22", "23", "24"], 
-//         "sixth": ["25", "26", "27", "28", "29"],
-// };
 
 let userArray = [];
 let charIndex;
@@ -67,12 +55,6 @@ let winningWordArray;
 
 // Game initializes game board
 const init = () => {
-    // for (let attempt of attempts) {
-    //     for (let i = 0; i < 5; i++) {
-    //         document.getElementById(wordleBoard[attempt][i]).style.backgroundColor = "";
-    //         document.getElementById(wordleBoard[attempt][i]).textContent = "";
-    //     }
-    // }
     for (let square of squaresEl) {
         square.style.backgroundColor = "";
         square.textContent = "";
@@ -97,16 +79,14 @@ document.addEventListener('DOMContentLoaded', init);
 
 for (let i = 0; i < keysEl.length; i++) {
     keysEl[i].addEventListener('click', () => {
+        if (winner) {
+            return;
+        }
         if (charIndex < 5 && currentAttemptIndex < 6) {
             userArray.push(keysEl[i].textContent.toLowerCase());
             if (userArray.length === 5) {
                 checkRealWord();
             }
-            // const wordEl = document.querySelector(`.${attempt}`);
-            // const lettersEl = wordEl.querySelectorAll('.letter');
-            // document.getElementById(wordleBoard[attempt][charIndex]).textContent = keysEl[i].textContent;
-            // squaresEl[charIndex].textContent = keysEl[i].textContent;
-            // lettersEl[charIndex].textContent = keysEl[i].textContent;
             document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = keysEl[i].textContent;
             charIndex++;
             console.log(userArray);
@@ -115,7 +95,7 @@ for (let i = 0; i < keysEl.length; i++) {
 }
 
 enterKeyEl.addEventListener('click', () => {
-    if (messageEl.textContent === "Not an allowed word") {
+    if (messageEl.textContent === "Not an allowed word" || winner) {
         return;
     } else if (userArray.length === 5 && currentAttemptIndex < 5) {
         compareWords();
@@ -137,9 +117,6 @@ backspaceKeyEl.addEventListener('click', () => {
     if (charIndex > 0) {
         userArray.pop();
         charIndex--;
-        // document.getElementById(wordleBoard[attempt][charIndex]).textContent = "";
-        // squaresEl[charIndex].textContent = "";
-        // lettersEl[charIndex].textContent = "";
         document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = "";
     }
 })
@@ -158,7 +135,6 @@ startButtonEl.addEventListener('click', () => {
 const compareWords = () => {
     const wordEl = document.querySelector(`.${attempt}`);
     const lettersEl = wordEl.querySelectorAll('.letter');
-    // const keysEl = document.querySelectorAll('.key');
 
     const winningArrayCopy = winningWord.split("");
     const backgroundColors = ["gray", "gray", "gray", "gray", "gray"]
@@ -175,7 +151,6 @@ const compareWords = () => {
         if (winningArrayCopy.includes(userArray[i]) && userArray[i] !== null) {
             backgroundColors[i] = "yellow";
             winningArrayCopy.splice(winningArrayCopy.indexOf(userArray[i]), 1, null);
-            // userArray.splice(i, 1, null);
         }
     }
 

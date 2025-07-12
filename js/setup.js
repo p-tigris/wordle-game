@@ -61,8 +61,6 @@ enterKeyEl.textContent = "ENTER";
     keyContainerEl.appendChild(el);
 })
 
-// keyContainerEl.style.display = "grid";
-// keyContainerEl.style.gridTemplateColumns = "repeat(5, 75px)";
 keyContainerEl.style.display = "flex";
 keyContainerEl.style.flexDirection = "column";
 
