@@ -13,17 +13,14 @@ const squaresEl = document.querySelectorAll(".letter");
 let winner;
 
 const keysEl = keyContainerEl.querySelectorAll(".key");
-console.log(keysEl);
 
 let userArray = [];
 let charIndex;
 
 const checkRealWord = () => {
     let isRealWord = false;
-    console.log(userArray);
     if (userArray.length === 5 && currentAttemptIndex < 6) {
         const userWord = userArray.join("");
-        console.log(userWord);
         for (let word of wordList) {
             if (word === userWord) {
                 isRealWord = true;
@@ -32,7 +29,6 @@ const checkRealWord = () => {
         }
     if (isRealWord === false) {
         messageEl.textContent = "Not an allowed word";
-        return;
     }
     }
 }
@@ -42,6 +38,7 @@ const checkWinner = () => {
         keyContainerEl.remove();
         gamePlayEl.appendChild(restartButtonEl);
     }
+
     if (winner) {
         messageEl.textContent = `Congratulations! ${winningWord.toUpperCase()} is the correct word!`;
     } else if (winner !== true && currentAttemptIndex === 5) {
@@ -63,8 +60,6 @@ const init = () => {
     // winningWord = wordList[Math.floor(Math.random() * wordList.length)];
     winningWord = "water";
     winningWordArray = winningWord.split("");
-    console.log(winningWord);
-    console.log(winningWordArray);
     currentAttemptIndex = 0;
     attempt = attempts[currentAttemptIndex];
     charIndex = 0;
@@ -89,7 +84,6 @@ for (let i = 0; i < keysEl.length; i++) {
             }
             document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = keysEl[i].textContent;
             charIndex++;
-            console.log(userArray);
         }
     });
 }
