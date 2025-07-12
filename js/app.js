@@ -156,6 +156,7 @@ const compareWords = () => {
     for (let i = 0; i < userArray.length; i++) {
         if (winningArrayCopy.includes(userArray[i]) && userArray[i] !== null) {
             backgroundColors[/*userArray.indexOf(userArray[i])*/i] = "yellow";
+            winningArrayCopy.splice(winningArrayCopy.indexOf(userArray[i]), 1, null);
             userArray.splice(i, 1, null);
         }
     }
