@@ -1,4 +1,4 @@
-import { startButtonEl, keyContainerEl, backspaceKeyEl, submitKeyEl, restartButtonEl } from "./setup.js";
+import { startButtonEl, keyContainerEl, backspaceKeyEl, submitKeyEl, returnButtonEl } from "./setup.js";
 import { wordList } from "./data.js";
 
 /*-------------------------------- Constants --------------------------------*/
@@ -164,7 +164,7 @@ const changeKeyColors = () => {
 const checkWinner = () => {
     if (winner || (winner !== true && currentAttemptIndex === 5)) {
         keyContainerEl.remove();
-        gamePlayEl.appendChild(restartButtonEl);
+        gamePlayEl.appendChild(returnButtonEl);
     }
 
     if (winner) {
@@ -189,7 +189,7 @@ backspaceKeyEl.addEventListener('click', backspace);
 
 submitKeyEl.addEventListener('click', submit);
 
-restartButtonEl.addEventListener('click', () => {
-    restartButtonEl.remove();
+returnButtonEl.addEventListener('click', () => {
+    returnButtonEl.remove();
     home();
 });

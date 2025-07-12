@@ -56,5 +56,5 @@ keyContainerEl.style.display = "flex";
 keyContainerEl.style.flexDirection = "column";
 
 
-export const restartButtonEl = document.createElement('button');
-restartButtonEl.textContent = "RETURN HOME";
+export const returnButtonEl = document.createElement('button');
+returnButtonEl.textContent = "RETURN HOME";
