@@ -37,6 +37,42 @@ const home = () => {
     messageEl.textContent = "Press Start Game to begin!";
 }
 
+const start = () => {
+    gamePlayEl.appendChild(keyContainerEl);
+    keysEl.forEach((key) => {
+        key.style.backgroundColor = "";
+    })
+    startButtonEl.remove();
+    messageEl.textContent = "";
+}
+
+const backspace = () => {  
+    if (messageEl.textContent === "Not an allowed word") {
+        messageEl.textContent = "";
+    }
+
+    if (charIndex > 0) {
+        userArray.pop();
+        charIndex--;
+        document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = "";
+    }
+}
+
+const submit = () => {
+    if (messageEl.textContent === "Not an allowed word") {
+        return;
+    } else if (userArray.length === 5) {
+        compareWords();
+        checkWinner();
+        if (currentAttemptIndex < 5) {
+            currentAttemptIndex++;
+            attempt = attempts[currentAttemptIndex];
+            charIndex = 0;
+            userArray = [];
+        }
+    }
+}
+
 const checkRealWord = () => {
     let isRealWord = false;
     if (userArray.length === 5 && currentAttemptIndex < 6) {
@@ -126,14 +162,7 @@ const checkWinner = () => {
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener('DOMContentLoaded', home);
 
-startButtonEl.addEventListener('click', () => {
-    gamePlayEl.appendChild(keyContainerEl);
-    keysEl.forEach((key) => {
-        key.style.backgroundColor = "";
-    })
-    startButtonEl.remove();
-    messageEl.textContent = "";
-})
+startButtonEl.addEventListener('click', start);
 
 for (let i = 0; i < keysEl.length; i++) {
     keysEl[i].addEventListener('click', () => {
@@ -146,33 +175,11 @@ for (let i = 0; i < keysEl.length; i++) {
             charIndex++;
         }
     });
-}
+};
 
-backspaceKeyEl.addEventListener('click', () => {
-    if (messageEl.textContent === "Not an allowed word") {
-        messageEl.textContent = "";
-    }
-    if (charIndex > 0) {
-        userArray.pop();
-        charIndex--;
-        document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = "";
-    }
-})
+backspaceKeyEl.addEventListener('click', backspace);
 
-submitKeyEl.addEventListener('click', () => {
-    if (messageEl.textContent === "Not an allowed word") {
-        return;
-    } else if (userArray.length === 5) {
-        compareWords();
-        checkWinner();
-        if (currentAttemptIndex < 5) {
-            currentAttemptIndex++;
-            attempt = attempts[currentAttemptIndex];
-            charIndex = 0;
-            userArray = [];
-        }
-    }
-})
+submitKeyEl.addEventListener('click', submit);
 
 restartButtonEl.addEventListener('click', () => {
     restartButtonEl.remove();
