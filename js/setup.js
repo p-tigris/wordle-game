@@ -1,5 +1,5 @@
 export const startButtonEl = document.createElement('button');
-startButtonEl.textContent = "Start Game";
+startButtonEl.textContent = "START GAME";
 
 export const keyContainerEl = document.createElement('div')
 

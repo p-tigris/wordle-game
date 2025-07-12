@@ -5,6 +5,10 @@ body {
     flex-direction: column;
 }
 
+#title {
+    cursor: pointer;
+}
+
 #grid {
     display: flex;
     flex-direction: column;

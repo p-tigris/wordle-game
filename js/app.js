@@ -15,6 +15,7 @@ let winningWord;
 let winningWordArray;
 
 /*------------------------ Cached Element References ------------------------*/
+const banana = document.querySelector("#title"); // Called "banana" at Glenn's request; otherwise would be named "titleEl"
 const messageEl = document.querySelector('#message');
 const gamePlayEl = document.querySelector('#game-play');
 const squaresEl = document.querySelectorAll(".letter");
@@ -176,6 +177,12 @@ const checkWinner = () => {
 
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener('DOMContentLoaded', home);
+
+banana.addEventListener('click', () => {
+    keyContainerEl.remove();
+    returnButtonEl.remove();
+    home();
+})
 
 startButtonEl.addEventListener('click', start);
 
