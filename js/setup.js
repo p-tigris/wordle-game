@@ -54,10 +54,10 @@ thirdRowContainerEl.style.flexDirection = "row";
 export const backspaceKeyEl = document.createElement('button');
 backspaceKeyEl.textContent = "⌫"
 
-export const enterKeyEl = document.createElement('button');
-enterKeyEl.textContent = "ENTER";
+export const submitKeyEl = document.createElement('button');
+submitKeyEl.textContent = "ENTER";
 
-[firstRowContainerEl, secondRowContainerEl, thirdRowContainerEl, backspaceKeyEl, enterKeyEl].forEach((el) => {
+[firstRowContainerEl, secondRowContainerEl, thirdRowContainerEl, backspaceKeyEl, submitKeyEl].forEach((el) => {
     keyContainerEl.appendChild(el);
 })
 

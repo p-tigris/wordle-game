@@ -1,4 +1,4 @@
-import { startButtonEl, keyContainerEl, backspaceKeyEl, enterKeyEl, restartButtonEl } from "./setup.js";
+import { startButtonEl, keyContainerEl, backspaceKeyEl, submitKeyEl, restartButtonEl } from "./setup.js";
 import { wordList } from "./data.js";
 
 /*-------------------------------- Constants --------------------------------*/
@@ -159,7 +159,7 @@ backspaceKeyEl.addEventListener('click', () => {
     }
 })
 
-enterKeyEl.addEventListener('click', () => {
+submitKeyEl.addEventListener('click', () => {
     if (messageEl.textContent === "Not an allowed word") {
         return;
     } else if (userArray.length === 5 && currentAttemptIndex < 5) {
