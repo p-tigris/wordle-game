@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', home);
 
 startButtonEl.addEventListener('click', () => {
     gamePlayEl.appendChild(keyContainerEl);
-    document.querySelectorAll(".key").forEach((key) => {
+    keysEl.forEach((key) => {
         key.style.backgroundColor = "";
     })
     startButtonEl.remove();
