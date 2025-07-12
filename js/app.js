@@ -8,6 +8,13 @@ const attempts = ["first", "second", "third", "fourth", "fifth", "sixth"];
 let currentAttemptIndex = 0;
 let attempt = attempts[currentAttemptIndex];
 
+// const rowEl = document.querySelector(`.${attempt}`);
+// const charEl = rowEl.querySelectorAll(".letter");
+
+// console.log(rowEl);
+// console.log(charEl);
+const squaresEl = document.querySelectorAll(".letter");
+
 let winner;
 
 // const keys = keyContainerEl.children;
@@ -61,15 +68,19 @@ const checkWinner = () => {
 let winningWord;
 let winningWordArray;
 
-console.log(wordleBoard[attempt]);
 // Game initializes game board
 const init = () => {
-    for (let attempt of attempts) {
-        for (let i = 0; i < 5; i++) {
-            document.getElementById(wordleBoard[attempt][i]).style.backgroundColor = "";
-            document.getElementById(wordleBoard[attempt][i]).textContent = "";
-        }
+    // for (let attempt of attempts) {
+    //     for (let i = 0; i < 5; i++) {
+    //         document.getElementById(wordleBoard[attempt][i]).style.backgroundColor = "";
+    //         document.getElementById(wordleBoard[attempt][i]).textContent = "";
+    //     }
+    // }
+    for (let square of squaresEl) {
+        square.style.backgroundColor = "";
+        square.textContent = "";
     }
+
     // winningWord = wordList[Math.floor(Math.random() * wordList.length)];
     winningWord = "might";
     winningWordArray = winningWord.split("");
@@ -94,7 +105,7 @@ for (let i = 0; i < keysEl.length; i++) {
             if (userArray.length === 5) {
                 checkRealWord();
             }
-            document.getElementById(wordleBoard[attempt][charIndex]).textContent = keysEl[i].textContent.toUpperCase();
+            document.getElementById(wordleBoard[attempt][charIndex]).textContent = keysEl[i].textContent;
             charIndex++;
             console.log(userArray);
         }
@@ -181,13 +192,13 @@ const compareWords = () => {
     })
 
     keysEl.forEach((key) => {
-        if (greenLetters.includes(key.textContent.toUpperCase())) {
+        if (greenLetters.includes(key.textContent)) {
             key.style.backgroundColor = "green";
-        } else if (yellowLetters.includes(key.textContent.toUpperCase())) {
+        } else if (yellowLetters.includes(key.textContent)) {
             if (key.style.backgroundColor !== "green") {
                 key.style.backgroundColor = "yellow";
             }
-        } else if (grayLetters.includes(key.textContent.toUpperCase())) {
+        } else if (grayLetters.includes(key.textContent)) {
             key.style.backgroundColor = "gray";
         }
     })
