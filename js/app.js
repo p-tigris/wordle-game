@@ -35,7 +35,7 @@ const home = () => {
     winner = false;
     gamePlayEl.appendChild(startButtonEl);
     messageEl.textContent = "Press Start Game to begin!";
-}
+};
 
 const start = () => {
     gamePlayEl.appendChild(keyContainerEl);
@@ -44,7 +44,7 @@ const start = () => {
     })
     startButtonEl.remove();
     messageEl.textContent = "";
-}
+};
 
 const keysFunction = (key) => {
     if (charIndex < 5 && currentAttemptIndex < 6) {
@@ -55,7 +55,7 @@ const keysFunction = (key) => {
         document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = key.textContent;
         charIndex++;
     }
-}
+};
 
 const backspace = () => {  
     if (messageEl.textContent === "Not an allowed word") {
@@ -67,13 +67,13 @@ const backspace = () => {
         charIndex--;
         document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = "";
     }
-}
+};
 
 const submit = () => {
     if (messageEl.textContent === "Not an allowed word") {
         return;
     } else if (userArray.length === 5) {
-        compareWords();
+        checkResponse();
         checkWinner();
         if (currentAttemptIndex < 5) {
             currentAttemptIndex++;
@@ -82,7 +82,7 @@ const submit = () => {
             userArray = [];
         }
     }
-}
+};
 
 const checkRealWord = () => {
     let isRealWord = false;
@@ -98,9 +98,9 @@ const checkRealWord = () => {
             messageEl.textContent = "Not an allowed word";
         }
     }
-}
+};
 
-const compareWords = () => {
+const checkResponse = () => {
     const lettersEl = document.querySelector(`.${attempt}`).querySelectorAll('.letter');
 
     const winningArrayCopy = winningWord.split("");
@@ -124,6 +124,16 @@ const compareWords = () => {
     lettersEl.forEach((letter, index) => {
         letter.style.backgroundColor = backgroundColors[index];
     })
+
+    if (userArray.every((char, index) => char === winningArrayCopy[index])) {
+        winner = true;
+    }
+
+    changeKeyColors();
+};
+
+const changeKeyColors = () => {
+    const lettersEl = document.querySelector(`.${attempt}`).querySelectorAll('.letter');
 
     const grayLetters = [];
     const greenLetters = [];
@@ -149,11 +159,6 @@ const compareWords = () => {
             key.style.backgroundColor = "gray";
         }
     })
-
-
-    if (userArray.every((char, index) => char === winningArrayCopy[index])) {
-        winner = true;
-    }
 };
 
 const checkWinner = () => {
@@ -167,7 +172,7 @@ const checkWinner = () => {
     } else if (winner !== true && currentAttemptIndex === 5) {
         messageEl.textContent = `Game Over. The correct word is ${winningWord.toUpperCase()}`;
     }
-}
+};
 
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener('DOMContentLoaded', home);
@@ -178,7 +183,7 @@ keysEl.forEach((key) => {
     key.addEventListener('click', () => {
         keysFunction(key);
     })
-})
+});
 
 backspaceKeyEl.addEventListener('click', backspace);
 
