@@ -101,8 +101,7 @@ const checkRealWord = () => {
 }
 
 const compareWords = () => {
-    const wordEl = document.querySelector(`.${attempt}`);
-    const lettersEl = wordEl.querySelectorAll('.letter');
+    const lettersEl = document.querySelector(`.${attempt}`).querySelectorAll('.letter');
 
     const winningArrayCopy = winningWord.split("");
     const backgroundColors = ["gray", "gray", "gray", "gray", "gray"]
