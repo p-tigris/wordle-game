@@ -46,6 +46,17 @@ const start = () => {
     messageEl.textContent = "";
 }
 
+const keysFunction = (key) => {
+    if (charIndex < 5 && currentAttemptIndex < 6) {
+        userArray.push(key.textContent.toLowerCase());
+        if (userArray.length === 5) {
+            checkRealWord();
+        }
+        document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = key.textContent;
+        charIndex++;
+    }
+}
+
 const backspace = () => {  
     if (messageEl.textContent === "Not an allowed word") {
         messageEl.textContent = "";
@@ -83,9 +94,9 @@ const checkRealWord = () => {
                 return;
             } 
         }
-    if (isRealWord === false) {
-        messageEl.textContent = "Not an allowed word";
-    }
+        if (isRealWord === false) {
+            messageEl.textContent = "Not an allowed word";
+        }
     }
 }
 
@@ -164,18 +175,11 @@ document.addEventListener('DOMContentLoaded', home);
 
 startButtonEl.addEventListener('click', start);
 
-for (let i = 0; i < keysEl.length; i++) {
-    keysEl[i].addEventListener('click', () => {
-        if (charIndex < 5 && currentAttemptIndex < 6) {
-            userArray.push(keysEl[i].textContent.toLowerCase());
-            if (userArray.length === 5) {
-                checkRealWord();
-            }
-            document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = keysEl[i].textContent;
-            charIndex++;
-        }
-    });
-};
+keysEl.forEach((key) => {
+    key.addEventListener('click', () => {
+        keysFunction(key);
+    })
+})
 
 backspaceKeyEl.addEventListener('click', backspace);
 
