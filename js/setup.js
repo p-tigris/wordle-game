@@ -55,7 +55,7 @@ export const backspaceKeyEl = document.createElement('button');
 backspaceKeyEl.textContent = "⌫"
 
 export const submitKeyEl = document.createElement('button');
-submitKeyEl.textContent = "ENTER";
+submitKeyEl.textContent = "SUBMIT";
 
 [firstRowContainerEl, secondRowContainerEl, thirdRowContainerEl, backspaceKeyEl, submitKeyEl].forEach((el) => {
     keyContainerEl.appendChild(el);
