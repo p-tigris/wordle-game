@@ -26,7 +26,7 @@ const home = () => {
     for (let square of squaresEl) {
         square.style.backgroundColor = "";
         square.textContent = "";
-        square.style.transform = "rotateY(0deg)";
+        square.style.transform = "";
         square.style.transition = "";
     }
     winningWord = wordList[Math.floor(Math.random() * wordList.length)];
@@ -37,7 +37,14 @@ const home = () => {
     userArray = [];
     winner = false;
     gamePlayEl.appendChild(startButtonEl);
-    messageEl.textContent = "Press Start Game to begin!";
+    messageEl.innerHTML = `Welcome to Wordle! Find out what five-letter word the game is thinking of.<br> 
+    After the game starts, you can type in your answers and submit them to see if they're correct.<br>
+    If any letters in your guess are correct and in the right position of the correct word, you'll see the letters in green boxes. 🟩<br>
+    If any letters are correct, but not in the right position of the correct word, you'll see them in yellow boxes. 🟨<br>
+    If any letters are not in the correct word, you'll see them in gray boxes. ⬛<br>
+    Guess the correct word within six tries to win the game.<br>
+    When you're ready, click on Start Game below. Good luck!`;
+    messageEl.style.fontSize = "1em";
 };
 
 const start = () => {
