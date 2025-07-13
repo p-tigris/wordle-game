@@ -135,6 +135,10 @@ const checkResponse = () => {
 
     lettersEl.forEach((letter, index) => {
         letter.style.backgroundColor = backgroundColors[index];
+        if (letter.style.backgroundColor === "yellow") {
+            letter.style.webkitTextStroke = "1px black";
+        }
+        letter.style.color = "white";
         letter.style.transform = "rotateY(360deg)";
         letter.style.transition = "transform 1.5s, background-color 1s";
     })

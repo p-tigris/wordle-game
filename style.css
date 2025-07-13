@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap");
+
 body {
     background: #EAE7DC;
     background-position: left, right;
@@ -24,7 +26,70 @@ body {
 
 #title {
     cursor: pointer;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Bagel Fat One', Verdana, sans-serif;
+    font-size: 3.5em;
+    color: rgba(255, 255, 255, 1);
+    -webkit-text-stroke: 0.5 black;
+}
+
+#w {
+    display: inline-block;
+    background-color: rgba(1, 190, 254, 1);
+    aspect-ratio: 1/1;
+    width: 1.5em;
+    text-align: center;
+    border: none;
+    border-radius: 50%;
+}
+
+#o {
+    display: inline-block;
+    background-color: rgba(255, 221, 0, 1);
+    aspect-ratio: 1/1;
+    width: 1.5em;
+    text-align: center;
+    border: none;
+    border-radius: 50%;
+}
+
+#r {
+    display: inline-block;
+    background-color: rgba(255, 125, 0, 1);
+    aspect-ratio: 1/1;
+    width: 1.5em;
+    text-align: center;
+    border: none;
+    border-radius: 50%;
+}
+
+#d {
+    display: inline-block;
+    background-color: rgba(255, 0, 109, 1);
+    aspect-ratio: 1/1;
+    width: 1.5em;
+    text-align: center;
+    border: none;
+    border-radius: 50%;
+}
+
+#l {
+    display: inline-block;
+    background-color: rgba(173, 255, 2, 1);
+    aspect-ratio: 1/1;
+    width: 1.5em;
+    text-align: center;
+    border: none;
+    border-radius: 50%;
+}
+
+#e {
+    display: inline-block;
+    background-color: rgba(143, 0, 255, 1);
+    aspect-ratio: 1/1;
+    width: 1.5em;
+    text-align: center;
+    border: none;
+    border-radius: 50%;
 }
 
 #grid {
@@ -44,8 +109,8 @@ body {
 }
 
 .letter {
-    background-color: rgba(20, 167, 108, 0.5);
-    border: 3px groove gold;
+    background-color: rgba(216, 195, 165, 1);
+    border: 3px groove rgba(0, 0, 0, 1);
     border-radius: 10px;
     aspect-ratio: 1/1;
     height: 30%;

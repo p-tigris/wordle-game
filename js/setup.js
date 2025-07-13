@@ -5,6 +5,7 @@ const buttonStyle = (button, width, fontSize, backgroundColor) => {
     button.style.width = width;
     button.style.fontSize = fontSize;
     button.style.backgroundColor = backgroundColor;
+    button.style.cursor = "pointer";
 }
 
 export const startButtonEl = document.createElement("button");
