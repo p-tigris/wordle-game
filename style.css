@@ -29,6 +29,7 @@ body {
     border: 5px solid;
     border-radius: 10px;
     aspect-ratio: 1/1;
+    height: 30%;
     width: 20%;
     font-size: 48px;
     text-align: center;

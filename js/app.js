@@ -134,7 +134,7 @@ const checkResponse = () => {
     lettersEl.forEach((letter, index) => {
         letter.style.backgroundColor = backgroundColors[index];
         letter.style.transform = "rotateY(360deg)";
-        letter.style.transition = "transform 1.5s";
+        letter.style.transition = "transform 1.5s, background-color 1s";
     })
 
     if (userArray.every((char, index) => char === winningArrayCopy[index])) {
