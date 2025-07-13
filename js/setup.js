@@ -1,5 +1,5 @@
 const buttonStyle = (button, width, fontSize, backgroundColor) => {
-    button.style.border = "ridge";
+    button.style.border = "groove";
     button.style.borderRadius = "10px";
     button.style.height = "50px";
     button.style.width = width;

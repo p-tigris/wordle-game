@@ -1,8 +1,25 @@
 body {
+    background: #EAE7DC;
+    background-position: left, right;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 30%;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.left-image {
+    position: fixed;
+    width: 30%;
+    left: 0;
+}
+
+.right-image {
+    position: fixed;
+    width: 30%;
+    right: 0;
 }
 
 #title {
@@ -27,8 +44,8 @@ body {
 }
 
 .letter {
-    background-color: rgba(245, 245, 220, 0.5);
-    border: 3px ridge;
+    background-color: rgba(20, 167, 108, 0.5);
+    border: 3px groove gold;
     border-radius: 10px;
     aspect-ratio: 1/1;
     height: 30%;
