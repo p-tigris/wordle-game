@@ -107,6 +107,7 @@ const checkRealWord = () => {
         if (isRealWord === false) {
             messageEl.textContent = "Not an allowed word";
             messageEl.style.fontSize = "1.5em";
+            messageEl.style.color = "red";
         }
     }
 };
@@ -180,6 +181,7 @@ const checkWinner = () => {
         gamePlayEl.appendChild(returnButtonEl);
     }
     messageEl.style.fontSize = "1.5em";
+    messageEl.style.color = "black";
     if (winner) {
         messageEl.textContent = `Congratulations! ${winningWord.toUpperCase()} is the correct word!`;
     } else if (winner !== true && currentAttemptIndex === 5) {
