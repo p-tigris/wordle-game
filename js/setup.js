@@ -1,5 +1,15 @@
+const buttonStyle = (button, width, fontSize, backgroundColor) => {
+    button.style.border = "ridge";
+    button.style.borderRadius = "10px";
+    button.style.height = "50px";
+    button.style.width = width;
+    button.style.fontSize = fontSize;
+    button.style.backgroundColor = backgroundColor;
+}
+
 export const startButtonEl = document.createElement("button");
 startButtonEl.textContent = "START GAME";
+buttonStyle(startButtonEl, "150px", "18px", "rgba(245, 245, 220, 0.5)");
 
 export const keyContainerEl = document.createElement("div")
 
@@ -17,10 +27,7 @@ for (let letter of firstRowLetters) {
     firstRowKeyEl.textContent = letter;
     firstRowKeyEl.classList.add("key");
     firstRowKeyEl.classList.add("first-row");
-    firstRowKeyEl.style.height = "50px";
-    firstRowKeyEl.style.width = "50px";
-    firstRowKeyEl.style.border = "ridge";
-    firstRowKeyEl.style.borderRadius = "10px";
+    buttonStyle(firstRowKeyEl, "50px", "24px", "rgba(245, 245, 220, 0.5)");
     firstRowContainerEl.appendChild(firstRowKeyEl);
 }
 
@@ -29,10 +36,7 @@ for (let letter of secondRowLetters) {
     secondRowKeyEl.textContent = letter;
     secondRowKeyEl.classList.add("key");
     secondRowKeyEl.classList.add("second-row");
-    secondRowKeyEl.style.height = "50px";
-    secondRowKeyEl.style.width = "50px";
-    secondRowKeyEl.style.border = "ridge";
-    secondRowKeyEl.style.borderRadius = "10px";
+    buttonStyle(secondRowKeyEl, "50px", "24px", "rgba(245, 245, 220, 0.5)");
     secondRowContainerEl.appendChild(secondRowKeyEl);
 }
 
@@ -41,10 +45,7 @@ for (let letter of thirdRowLetters) {
     thirdRowKeyEl.textContent = letter;
     thirdRowKeyEl.classList.add("key");
     thirdRowKeyEl.classList.add("third-row");
-    thirdRowKeyEl.style.height = "50px";
-    thirdRowKeyEl.style.width = "50px";
-    thirdRowKeyEl.style.border = "ridge";
-    thirdRowKeyEl.style.borderRadius = "10px";
+    buttonStyle(thirdRowKeyEl, "50px", "24px", "rgba(245, 245, 220, 0.5)");
     thirdRowContainerEl.appendChild(thirdRowKeyEl);
 }
 
@@ -57,18 +58,12 @@ thirdRowContainerEl.style.gap = "5px";
 
 export const backspaceKeyEl = document.createElement("button");
 backspaceKeyEl.textContent = "⌫"
-backspaceKeyEl.style.height = "50px";
-backspaceKeyEl.style.width = "50px";
-backspaceKeyEl.style.border = "ridge";
-backspaceKeyEl.style.borderRadius = "10px";
+buttonStyle(backspaceKeyEl, "50px", "24px", "rgba(245, 245, 220, 0.5)");
 fourthRowContainerEl.appendChild(backspaceKeyEl);
 
 export const submitKeyEl = document.createElement("button");
 submitKeyEl.textContent = "SUBMIT";
-submitKeyEl.style.height = "50px";
-submitKeyEl.style.width = "80px";
-submitKeyEl.style.border = "ridge";
-submitKeyEl.style.borderRadius = "10px";
+buttonStyle(submitKeyEl, "120px", "24px", "rgba(245, 245, 220, 0.5)");
 fourthRowContainerEl.appendChild(submitKeyEl);
 
 fourthRowContainerEl.style.display = "flex";
@@ -85,3 +80,4 @@ keyContainerEl.style.gap = "5px";
 
 export const returnButtonEl = document.createElement("button");
 returnButtonEl.textContent = "RETURN HOME";
+buttonStyle(returnButtonEl, "180px", "18px", "rgba(245, 245, 220, 0.5)");

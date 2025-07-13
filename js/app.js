@@ -50,7 +50,7 @@ const home = () => {
 const start = () => {
     gamePlayEl.appendChild(keyContainerEl);
     keysEl.forEach((key) => {
-        key.style.backgroundColor = "";
+        key.style.backgroundColor = "rgba(245, 245, 220, 0.5)";
     })
     startButtonEl.remove();
     messageEl.textContent = "";
@@ -106,6 +106,7 @@ const checkRealWord = () => {
         }
         if (isRealWord === false) {
             messageEl.textContent = "Not an allowed word";
+            messageEl.style.fontSize = "1.5em";
         }
     }
 };
@@ -178,7 +179,7 @@ const checkWinner = () => {
         keyContainerEl.remove();
         gamePlayEl.appendChild(returnButtonEl);
     }
-
+    messageEl.style.fontSize = "1.5em";
     if (winner) {
         messageEl.textContent = `Congratulations! ${winningWord.toUpperCase()} is the correct word!`;
     } else if (winner !== true && currentAttemptIndex === 5) {
