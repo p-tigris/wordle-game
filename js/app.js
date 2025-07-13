@@ -26,6 +26,8 @@ const home = () => {
     for (let square of squaresEl) {
         square.style.backgroundColor = "";
         square.textContent = "";
+        square.style.transform = "rotateY(0deg)";
+        square.style.transition = "";
     }
     winningWord = wordList[Math.floor(Math.random() * wordList.length)];
     winningWordArray = winningWord.split("");
