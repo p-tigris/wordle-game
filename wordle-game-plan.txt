@@ -1,6 +1,6 @@
 Wordle
 
-// GAMEPLAY
+// PSEUDOCODE
 // At the beginning of the app, the users see the game grid, so they know they're at the right app.
 
 // The user will be able to click on the "Start Game" button, to begin the game.
@@ -25,6 +25,8 @@ and five is the number of letters allowed in each attempt.
 word for the game.
 
 // The game will display which letters have are in the winning word or if they're in the proper position with background colors on each word..
+
+// Animations for the words after a guess and keyboard keys changing colors.
 
 // Game compares the winning word with the user's guess through comparing arrays.
 
