@@ -182,3 +182,18 @@ dialog {
 .key:active, .non-letter-key:active, #enter-button:active, .button:active {
     transform: translateY(3px);
 }
+
+@media only screen and (max-width: 600px) {
+    dialog {
+        background-color: #FFC0CB;
+        height: 60%;
+        width: 60%;
+        border: 5px solid;
+        border-radius: 20px;
+        border-color: #E85A4F;
+        color: #000000;
+        text-align: center;
+        font-family: 'Gabriela', 'Courier New', Courier, monospace;
+        font-size: medium;
+    }
+}
