@@ -185,7 +185,7 @@ dialog {
 
 @media screen and (max-width: 600px) {
     dialog {
-        height: 58%;
+        height: 80%;
         width: 50%;
         font-size: small;
     }
