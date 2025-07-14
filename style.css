@@ -183,7 +183,7 @@ dialog {
     transform: translateY(3px);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 430px) {
     dialog {
         height: 80%;
         width: 50%;
@@ -216,6 +216,6 @@ dialog {
     .button {
         height: 30px;
         width: 130px;
-        font-size: 1.5em;
+        font-size: 1em;
     }
 }
