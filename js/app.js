@@ -9,10 +9,9 @@ const attempts = ["first", "second", "third", "fourth", "fifth", "sixth"];
 let currentAttemptIndex;
 let attempt;
 let winner;
-let userArray;
+let userLetters;
 let charIndex;
 let winningWord;
-let winningWordArray;
 
 /*------------------------ Cached Element References ------------------------*/
 const banana = document.querySelector("#title"); // Named "banana" at Glenn's request; otherwise it would be named "titleEl"
@@ -31,11 +30,10 @@ const home = () => {
         square.style.transition = "";
     }
     winningWord = wordList[Math.floor(Math.random() * wordList.length)];
-    winningWordArray = winningWord.split("");
     currentAttemptIndex = 0;
     attempt = attempts[currentAttemptIndex];
     charIndex = 0;
-    userArray = [];
+    userLetters = [];
     winner = false;
     gamePlayEl.appendChild(startButtonEl);
     messageEl.textContent = "Click Start Game below to begin!";
@@ -52,8 +50,8 @@ const start = () => {
 
 const keys = (keyEl) => {
     if (charIndex < 5 && currentAttemptIndex < 6) {
-        userArray.push(keyEl.textContent.toLowerCase());
-        if (userArray.length === 5) {
+        userLetters.push(keyEl.textContent.toLowerCase());
+        if (userLetters.length === 5) {
             checkRealWord();
         }
         document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = keyEl.textContent;
@@ -68,7 +66,7 @@ const backspace = () => {
     }
 
     if (charIndex > 0) {
-        userArray.pop();
+        userLetters.pop();
         charIndex--;
         document.querySelector(`.${attempt}`).querySelectorAll('.letter')[charIndex].textContent = "";
     }
@@ -77,22 +75,22 @@ const backspace = () => {
 const submit = () => {
     if (messageEl.textContent === "Not a valid word") {
         return;
-    } else if (userArray.length === 5) {
+    } else if (userLetters.length === 5) {
         checkResponse();
         checkWinner();
         if (currentAttemptIndex < 5) {
             currentAttemptIndex++;
             attempt = attempts[currentAttemptIndex];
             charIndex = 0;
-            userArray = [];
+            userLetters = [];
         }
     }
 };
 
 const checkRealWord = () => {
     let isRealWord = false;
-    if (userArray.length === 5 && currentAttemptIndex < 6) {
-        const userWord = userArray.join("");
+    if (userLetters.length === 5 && currentAttemptIndex < 6) {
+        const userWord = userLetters.join("");
         for (let word of wordList) {
             if (word === userWord) {
                 isRealWord = true;
@@ -109,21 +107,21 @@ const checkRealWord = () => {
 const checkResponse = () => {
     const lettersEl = document.querySelector(`.${attempt}`).querySelectorAll('.letter');
 
-    const winningArrayCopy = winningWord.split("");
+    const winningLetters = winningWord.split("");
     const backgroundColors = ["gray", "gray", "gray", "gray", "gray"]
 
-    for (let i = 0; i < userArray.length; i++) {
-        if (userArray[i] === winningArrayCopy[i]) {
+    for (let i = 0; i < userLetters.length; i++) {
+        if (userLetters[i] === winningLetters[i]) {
             backgroundColors[i] = "green";
-            winningArrayCopy.splice(i, 1, null);
-            userArray.splice(i, 1, null);
+            winningLetters.splice(i, 1, null);
+            userLetters.splice(i, 1, null);
         }
     }
 
-    for (let i = 0; i < userArray.length; i++) {
-        if (winningArrayCopy.includes(userArray[i]) && userArray[i] !== null) {
+    for (let i = 0; i < userLetters.length; i++) {
+        if (winningLetters.includes(userLetters[i]) && userLetters[i] !== null) {
             backgroundColors[i] = "gold";
-            winningArrayCopy.splice(winningArrayCopy.indexOf(userArray[i]), 1, null);
+            winningLetters.splice(winningLetters.indexOf(userLetters[i]), 1, null);
         }
     }
 
@@ -138,7 +136,7 @@ const checkResponse = () => {
         letter.style.transition = "transform 1.5s, background-color 1s";
     })
 
-    if (userArray.every((char, index) => char === winningArrayCopy[index])) {
+    if (userLetters.every((char, index) => char === winningLetters[index])) {
         winner = true;
     }
 
