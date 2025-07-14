@@ -206,15 +206,15 @@ dialog {
         font-size: 30px;
     }
     .key, .non-letter-key {
-        height: 40px;
-        width: 40px;
-        font-size: 1em;
+        height: 20px;
+        width: 20px;
+        font-size: 0.5em;
     }
     #submit {
-        width: 85px;
+        width: 50px;
     }
     .button {
-        height: 30px;
+        height: 70px;
         width: 130px;
         font-size: 1em;
     }
