@@ -35,6 +35,8 @@ The game can be accessed [here](https://p-tigris.github.io/wordle-game/).
 
 **Images:** [Pixabay](https://pixabay.com/). Images are freely available to the public.
 
+**Library:** [Mozilla Developer Network](https://developer.mozilla.org/en-US/).
+
 ## 🛠️ Technologies Used
 
 This app was created with HTML, CSS and JavaScript. It is heavily focused on DOM manipulation, particularly in creating dynamic elements and manipulating them through various functions.
@@ -43,6 +45,9 @@ AI was used for the purposes of some debugging assistance and help with style ch
 
 ## 🔜 Next Steps
 
-The biggest limitation of this app is the amount of data it contains. As a result, there can only be so many games played before the words are repeated. The next step is to get more data from external sources online. API integration would be required here; once implemented, the app would have access to bigger databases.
+* The biggest limitation of this app is the amount of data it contains; There can only be so many games played before the words are repeated. API integration would be the next step to gain access to larger databases.
 
-Another possible next step would be to implement a two-player system for the app, which would allow users to play against each other to guess the correct word. This may require new elements such as a timer, a scoreboard, and maybe even server hosting.
+* Another possible next step would be to implement a two-player system for the app, which would allow users to play against each other to guess the correct word. This may involve the implementation of 
+    * A timer 
+    * A scoreboard
+    * Server hosting
