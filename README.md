@@ -51,3 +51,5 @@ AI was used for the purposes of some debugging assistance and help with style ch
     * A timer 
     * A scoreboard
     * Server hosting
+
+* More responsive design for smaller computer screens, to go along with the already existing design for smartphones
