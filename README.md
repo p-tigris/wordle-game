@@ -27,7 +27,7 @@ The game can be accessed [here](https://p-tigris.github.io/wordle-game/).
 
 > Note: The user must input a word that the game recognizes in its data. If such a word is invalid, the user must use backspace and enter a new word in order to continue playing.
 
-📋 Planning materials included [here](./wordle-game-plan.txt).
+📋 Planning materials included [here](https://docs.google.com/document/d/1-9-ayT5T3FycCB00tVZo1IY1-TwcopLKcGYY_j8FOFw/edit?tab=t.0).
 
 ## Attributions
 
