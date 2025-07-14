@@ -30,8 +30,7 @@ const home = () => {
         square.style.transform = "";
         square.style.transition = "";
     }
-    // winningWord = wordList[Math.floor(Math.random() * wordList.length)];
-    winningWord = "other";
+    winningWord = wordList[Math.floor(Math.random() * wordList.length)];
     winningWordArray = winningWord.split("");
     currentAttemptIndex = 0;
     attempt = attempts[currentAttemptIndex];
