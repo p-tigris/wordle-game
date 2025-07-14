@@ -47,9 +47,9 @@ AI was used for the purposes of some debugging assistance and help with style ch
 
 * The biggest limitation of this app is the amount of data it contains; There can only be so many games played before the words are repeated. API integration would be the next step to gain access to larger databases.
 
-* Another possible next step would be to implement a two-player system for the app, which would allow users to play against each other to guess the correct word. This may involve the implementation of 
+* Another possible next step would be to implement a two-player system for the app, which would allow users to play against each other to guess the correct word. This may involve the implementation of: 
     * A timer 
     * A scoreboard
     * Server hosting
 
-* More responsive design for smaller computer screens, to go along with the already existing design for smartphones
+* More responsive design for smaller computer screens, to go along with the already existing design for smartphones.
