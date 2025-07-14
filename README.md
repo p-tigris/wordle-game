@@ -52,4 +52,4 @@ AI was used for the purposes of some debugging assistance and help with style ch
     * A scoreboard
     * Server hosting
 
-* More responsive design for smaller computer screens or windows; to go along with the already existing design for smartphones.
+* More responsive design for smaller computer screens or windows; this would go along with the already existing design for smartphones.
