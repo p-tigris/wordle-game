@@ -5,14 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <script type="module" defer src="./js/app.js"></script>
-    <title>Wordle</title>
+    <title>Birdle</title>
 </head>
 <body>
+    <dialog open>
+        <h2>How to Play Birdle</h2>
+        <p>Welcome to Birdle, the avian-themed Wordle! Find out what five-letter word the game is thinking of, which may be bird-related.<br>
+        After the game starts, you can type in your answers and submit them to see if they're correct.<br>
+        If any letters in your guess are correct and in the right position of the correct word, you'll see the letters in green boxes. 🟩<br>
+        If any letters are correct, but not in the right position of the correct word, you'll see them in yellow boxes. 🟨<br>  
+        If any letters are not in the correct word, you'll see them in gray boxes. ⬛<br>        
+        Guess the correct word within six tries to win the game.<br>
+        Good luck!</p>
+        <form method="dialog">
+            <button id="enter-button">ENTER BIRDLE</button>
+        </form>
+    </dialog>
+    <img src="./images/bird-1.png" alt="Bird" class="top-left-image">
+    <img src="./images/bird-2.png" alt="Bird" class="top-right-image">
     <img src="./images/ctv-1.png" alt="Chinese Trumpet Vine" class="left-image">
     <img src="./images/ctv-2.png" alt="Chinese Trumpet Vine" class="right-image">
     <h1 id="title">
-        <span id="w">W</span>
-        <span id="o">O</span>
+        <span id="b">B</span>
+        <span id="i">I</span>
         <span id="r">R</span>
         <span id="d">D</span>
         <span id="l">L</span>

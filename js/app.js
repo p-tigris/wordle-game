@@ -25,11 +25,13 @@ const keysEl = keyContainerEl.querySelectorAll(".key");
 const home = () => {
     for (let square of squaresEl) {
         square.style.backgroundColor = "";
+        square.style.color = "";
         square.textContent = "";
         square.style.transform = "";
         square.style.transition = "";
     }
-    winningWord = wordList[Math.floor(Math.random() * wordList.length)];
+    // winningWord = wordList[Math.floor(Math.random() * wordList.length)];
+    winningWord = "other";
     winningWordArray = winningWord.split("");
     currentAttemptIndex = 0;
     attempt = attempts[currentAttemptIndex];
@@ -37,23 +39,16 @@ const home = () => {
     userArray = [];
     winner = false;
     gamePlayEl.appendChild(startButtonEl);
-    messageEl.innerHTML = `Welcome to Wordle! Find out what five-letter word the game is thinking of.<br> 
-    After the game starts, you can type in your answers and submit them to see if they're correct.<br>
-    If any letters in your guess are correct and in the right position of the correct word, you'll see the letters in green boxes. 🟩<br>
-    If any letters are correct, but not in the right position of the correct word, you'll see them in yellow boxes. 🟨<br>
-    If any letters are not in the correct word, you'll see them in gray boxes. ⬛<br>
-    Guess the correct word within six tries to win the game.<br>
-    When you're ready, click on Start Game below. Good luck!`;
-    messageEl.style.fontSize = "1em";
+    messageEl.textContent = "Click Start Game below to begin!";
 };
 
 const start = () => {
     gamePlayEl.appendChild(keyContainerEl);
     keysEl.forEach((key) => {
-        key.style.backgroundColor = "rgba(245, 245, 220, 0.5)";
+        key.style.backgroundColor = "";
     })
     startButtonEl.remove();
-    messageEl.textContent = "";
+    messageEl.textContent = "Can you guess the word?";
 };
 
 const keys = (keyEl) => {
@@ -68,8 +63,9 @@ const keys = (keyEl) => {
 };
 
 const backspace = () => {  
-    if (messageEl.textContent === "Not an allowed word") {
-        messageEl.textContent = "";
+    if (messageEl.textContent === "Not a valid word") {
+        messageEl.textContent = "Can you guess the word?";
+        messageEl.style.color = "";
     }
 
     if (charIndex > 0) {
@@ -80,7 +76,7 @@ const backspace = () => {
 };
 
 const submit = () => {
-    if (messageEl.textContent === "Not an allowed word") {
+    if (messageEl.textContent === "Not a valid word") {
         return;
     } else if (userArray.length === 5) {
         checkResponse();
@@ -105,9 +101,8 @@ const checkRealWord = () => {
             } 
         }
         if (isRealWord === false) {
-            messageEl.textContent = "Not an allowed word";
-            messageEl.style.fontSize = "1.5em";
-            messageEl.style.color = "red";
+            messageEl.textContent = "Not a valid word";
+            messageEl.style.color = "#FF0000";
         }
     }
 };
@@ -128,17 +123,18 @@ const checkResponse = () => {
 
     for (let i = 0; i < userArray.length; i++) {
         if (winningArrayCopy.includes(userArray[i]) && userArray[i] !== null) {
-            backgroundColors[i] = "yellow";
+            backgroundColors[i] = "gold";
             winningArrayCopy.splice(winningArrayCopy.indexOf(userArray[i]), 1, null);
         }
     }
 
     lettersEl.forEach((letter, index) => {
         letter.style.backgroundColor = backgroundColors[index];
-        if (letter.style.backgroundColor === "yellow") {
-            letter.style.webkitTextStroke = "1px black";
+        if (letter.style.backgroundColor === "green") {
+            letter.style.color = "#FFFFFF";
+        } else {
+            letter.style.color = "#000000";
         }
-        letter.style.color = "white";
         letter.style.transform = "rotateY(360deg)";
         letter.style.transition = "transform 1.5s, background-color 1s";
     })
@@ -171,7 +167,7 @@ const changeKeyColors = () => {
             key.style.backgroundColor = "green";
         } else if (yellowLetters.includes(key.textContent)) {
             if (key.style.backgroundColor !== "green") {
-                key.style.backgroundColor = "yellow";
+                key.style.backgroundColor = "gold";
             }
         } else if (grayLetters.includes(key.textContent)) {
             key.style.backgroundColor = "gray";
@@ -184,8 +180,7 @@ const checkWinner = () => {
         keyContainerEl.remove();
         gamePlayEl.appendChild(returnButtonEl);
     }
-    messageEl.style.fontSize = "1.5em";
-    messageEl.style.color = "black";
+    messageEl.style.color = "";
     if (winner) {
         messageEl.textContent = `Congratulations! ${winningWord.toUpperCase()} is the correct word!`;
     } else if (winner !== true && currentAttemptIndex === 5) {
